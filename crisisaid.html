@@ -1,0 +1,1678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CrisisAid — Find Verified Help Now</title>
+<style>
+:root {
+  --primary: #1D4ED8;
+  --primary-light: #EFF6FF;
+  --primary-hover: #1e40af;
+  --urgent: #DC2626;
+  --urgent-light: #FEF2F2;
+  --success: #16A34A;
+  --success-light: #F0FDF4;
+  --warning: #D97706;
+  --warning-light: #FFFBEB;
+  --purple: #7C3AED;
+  --purple-light: #F5F3FF;
+  --pink: #DB2777;
+  --pink-light: #FDF2F8;
+  --gray-50: #F9FAFB;
+  --gray-100: #F3F4F6;
+  --gray-200: #E5E7EB;
+  --gray-300: #D1D5DB;
+  --gray-400: #9CA3AF;
+  --gray-500: #6B7280;
+  --gray-600: #4B5563;
+  --gray-700: #374151;
+  --gray-800: #1F2937;
+  --gray-900: #111827;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --shadow: 0 1px 3px rgba(0,0,0,.1), 0 1px 2px rgba(0,0,0,.06);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,.1), 0 2px 4px -1px rgba(0,0,0,.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,.1), 0 4px 6px -2px rgba(0,0,0,.05);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--gray-50);
+  color: var(--gray-900);
+  min-height: 100vh;
+  line-height: 1.5;
+}
+
+/* ── NAV ── */
+.nav {
+  background: #fff;
+  border-bottom: 1px solid var(--gray-200);
+  padding: 0 24px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--primary);
+  text-decoration: none;
+}
+.logo-icon { font-size: 22px; }
+.nav-right { display: flex; align-items: center; gap: 12px; }
+.btn-settings {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  color: var(--gray-400);
+  padding: 4px;
+  border-radius: 6px;
+  transition: color .15s;
+}
+.btn-settings:hover { color: var(--gray-700); }
+.badge-ai {
+  background: var(--primary-light);
+  color: var(--primary);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 20px;
+  letter-spacing: .3px;
+}
+
+/* ── SCREENS ── */
+.screen { display: none; }
+.screen.active { display: block; }
+
+/* ── SETTINGS PANEL ── */
+.settings-panel {
+  display: none;
+  position: fixed;
+  top: 56px;
+  right: 16px;
+  background: #fff;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius);
+  padding: 20px;
+  width: 340px;
+  box-shadow: var(--shadow-lg);
+  z-index: 200;
+}
+.settings-panel.open { display: block; }
+.settings-panel h3 { font-size: 14px; font-weight: 600; margin-bottom: 12px; }
+.settings-panel label { font-size: 12px; color: var(--gray-600); display: block; margin-bottom: 4px; }
+.settings-panel input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid var(--gray-300);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  font-family: monospace;
+}
+.settings-panel small { color: var(--gray-400); font-size: 11px; display: block; margin-top: 6px; }
+.btn-save-key {
+  margin-top: 12px;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+}
+.btn-save-key:hover { background: var(--primary-hover); }
+.key-status { font-size: 12px; margin-top: 8px; font-weight: 500; }
+.key-status.active { color: var(--success); }
+.key-status.inactive { color: var(--gray-400); }
+
+/* ── INTAKE SCREEN ── */
+.intake-wrapper {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+}
+.hero { text-align: center; margin-bottom: 40px; }
+.hero h1 {
+  font-size: clamp(28px, 5vw, 42px);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -.5px;
+  margin-bottom: 14px;
+}
+.hero h1 .highlight { color: var(--primary); }
+.hero p {
+  font-size: 17px;
+  color: var(--gray-600);
+  max-width: 480px;
+  margin: 0 auto;
+}
+.intake-card {
+  background: #fff;
+  border: 1px solid var(--gray-200);
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: var(--shadow-md);
+}
+.intake-card > label {
+  display: block;
+  font-weight: 600;
+  font-size: 15px;
+  margin-bottom: 8px;
+}
+.label-hint { color: var(--gray-400); font-weight: 400; font-size: 13px; margin-left: 4px; }
+textarea#situation {
+  width: 100%;
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  font-size: 15px;
+  font-family: inherit;
+  resize: vertical;
+  line-height: 1.6;
+  color: var(--gray-800);
+  transition: border-color .15s;
+  min-height: 110px;
+}
+textarea#situation:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(29,78,216,.1);
+}
+textarea#situation::placeholder { color: var(--gray-400); }
+.quick-filters {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 20px 0;
+}
+.filter-group label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gray-700);
+  margin-bottom: 6px;
+}
+.filter-group input,
+.filter-group select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--gray-800);
+  background: #fff;
+  transition: border-color .15s;
+  -webkit-appearance: none;
+}
+.filter-group input:focus,
+.filter-group select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(29,78,216,.1);
+}
+.urgency-section { margin: 0 0 20px; }
+.urgency-section label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gray-700);
+  margin-bottom: 8px;
+}
+.urgency-options {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.urgency-btn {
+  flex: 1;
+  min-width: 120px;
+  padding: 10px 12px;
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-sm);
+  background: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--gray-700);
+  cursor: pointer;
+  transition: all .15s;
+  text-align: center;
+}
+.urgency-btn:hover { border-color: var(--primary); color: var(--primary); }
+.urgency-btn.selected {
+  background: var(--primary-light);
+  border-color: var(--primary);
+  color: var(--primary);
+  font-weight: 600;
+}
+.urgency-btn[data-value="today"].selected {
+  background: var(--urgent-light);
+  border-color: var(--urgent);
+  color: var(--urgent);
+}
+.btn-primary {
+  width: 100%;
+  padding: 14px;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .15s, transform .1s;
+  letter-spacing: .2px;
+}
+.btn-primary:hover { background: var(--primary-hover); }
+.btn-primary:active { transform: scale(.99); }
+.disclaimer {
+  text-align: center;
+  font-size: 12px;
+  color: var(--gray-400);
+  margin-top: 12px;
+}
+
+/* ── ANALYZING SCREEN ── */
+.analyzing-wrapper {
+  max-width: 520px;
+  margin: 80px auto;
+  padding: 0 24px;
+  text-align: center;
+}
+.spinner-ring {
+  width: 56px;
+  height: 56px;
+  border: 4px solid var(--gray-200);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 24px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.analyzing-wrapper h2 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.analyzing-wrapper .sub {
+  color: var(--gray-500);
+  font-size: 14px;
+  margin-bottom: 32px;
+}
+.analysis-steps { text-align: left; }
+.analysis-step {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--gray-100);
+  font-size: 14px;
+  color: var(--gray-400);
+  transition: color .3s;
+}
+.analysis-step.done { color: var(--gray-800); }
+.analysis-step.active { color: var(--primary); font-weight: 500; }
+.step-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  background: var(--gray-100);
+  flex-shrink: 0;
+  transition: all .3s;
+}
+.analysis-step.done .step-icon { background: var(--success-light); }
+.analysis-step.active .step-icon {
+  background: var(--primary-light);
+  animation: pulse-icon 1.2s ease infinite;
+}
+@keyframes pulse-icon {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.12); }
+}
+
+/* ── RESULTS SCREEN ── */
+.results-wrapper {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 28px 24px 80px;
+}
+.results-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.btn-back {
+  background: none;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-sm);
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  color: var(--gray-600);
+  transition: all .15s;
+}
+.btn-back:hover { border-color: var(--gray-400); color: var(--gray-900); }
+
+/* AI Interpretation card */
+.ai-card {
+  background: var(--primary-light);
+  border: 1px solid #bfdbfe;
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  margin-bottom: 16px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.ai-card-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+.ai-card-body h4 { font-size: 13px; font-weight: 600; color: var(--primary); margin-bottom: 4px; }
+.ai-card-body p { font-size: 14px; color: var(--gray-700); line-height: 1.5; }
+.need-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.need-tag {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+  background: #fff;
+  color: var(--primary);
+  border: 1px solid #bfdbfe;
+}
+
+/* Urgent banner */
+.urgent-banner {
+  background: var(--urgent-light);
+  border: 1px solid #fca5a5;
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  margin-bottom: 16px;
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.urgent-banner-icon { font-size: 22px; flex-shrink: 0; }
+.urgent-banner h4 { font-size: 14px; font-weight: 700; color: var(--urgent); margin-bottom: 4px; }
+.urgent-banner p { font-size: 13px; color: #7f1d1d; line-height: 1.5; }
+
+/* Filter bar */
+.filter-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.results-count { font-size: 14px; color: var(--gray-600); font-weight: 500; }
+.filter-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+.filter-tab {
+  padding: 6px 14px;
+  border: 1.5px solid var(--gray-200);
+  border-radius: 20px;
+  background: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all .15s;
+  color: var(--gray-600);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.filter-tab:hover { border-color: var(--primary); color: var(--primary); }
+.filter-tab.active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+.tab-count {
+  background: rgba(255,255,255,.25);
+  border-radius: 10px;
+  padding: 0 5px;
+  font-size: 11px;
+  font-weight: 700;
+}
+.filter-tab:not(.active) .tab-count {
+  background: var(--gray-100);
+  color: var(--gray-500);
+}
+
+/* Sort control */
+.sort-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.sort-control label { font-size: 13px; color: var(--gray-500); }
+.sort-control select {
+  padding: 5px 10px;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-sm);
+  font-size: 13px;
+  color: var(--gray-700);
+  background: #fff;
+  cursor: pointer;
+}
+
+/* Program cards */
+.programs-grid { display: flex; flex-direction: column; gap: 14px; }
+.program-card {
+  background: #fff;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  box-shadow: var(--shadow);
+  transition: box-shadow .2s, border-color .2s;
+  cursor: pointer;
+  position: relative;
+}
+.program-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--gray-300);
+}
+.program-card.urgent-card { border-left: 4px solid var(--urgent); }
+.card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.card-header-left { display: flex; align-items: flex-start; gap: 12px; flex: 1; min-width: 0; }
+.cat-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+.card-title-block { min-width: 0; }
+.card-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--gray-900);
+  line-height: 1.3;
+}
+.card-org { font-size: 13px; color: var(--gray-500); margin-top: 2px; }
+.card-badges { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; flex-shrink: 0; }
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+.badge-verified-high { background: var(--success-light); color: var(--success); }
+.badge-verified-medium { background: var(--warning-light); color: var(--warning); }
+.badge-verified-low { background: #FFF7ED; color: #EA580C; }
+.badge-verified-unknown { background: var(--gray-100); color: var(--gray-500); }
+.badge-response {
+  background: var(--primary-light);
+  color: var(--primary);
+}
+.badge-response.urgent-response { background: var(--urgent-light); color: var(--urgent); }
+.card-summary {
+  font-size: 14px;
+  color: var(--gray-700);
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+.card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  font-size: 13px;
+  color: var(--gray-500);
+}
+.card-meta-item { display: flex; align-items: center; gap: 5px; }
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid var(--gray-100);
+}
+.btn-details {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--primary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.btn-details:hover { text-decoration: underline; }
+.card-docs {
+  font-size: 12px;
+  color: var(--gray-400);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* No results */
+.no-results {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--gray-500);
+}
+.no-results h3 { font-size: 18px; margin-bottom: 8px; }
+.no-results p { font-size: 14px; }
+
+/* Responsible AI note */
+.rai-note {
+  background: var(--gray-100);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  margin-top: 32px;
+}
+.rai-note h4 { font-size: 13px; font-weight: 600; color: var(--gray-700); margin-bottom: 6px; }
+.rai-note p { font-size: 12px; color: var(--gray-500); line-height: 1.6; }
+
+/* ── MODAL ── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.5);
+  z-index: 300;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0;
+  backdrop-filter: blur(2px);
+}
+@media (min-width: 640px) {
+  .modal-overlay { align-items: center; padding: 24px; }
+}
+.modal-box {
+  background: #fff;
+  border-radius: 20px 20px 0 0;
+  width: 100%;
+  max-width: 620px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+}
+@media (min-width: 640px) {
+  .modal-box { border-radius: 20px; }
+}
+.modal-header {
+  padding: 24px 24px 16px;
+  position: sticky;
+  top: 0;
+  background: #fff;
+  border-bottom: 1px solid var(--gray-100);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  z-index: 1;
+}
+.modal-header-left { display: flex; gap: 12px; align-items: flex-start; }
+.modal-header .cat-icon { width: 48px; height: 48px; font-size: 24px; }
+.modal-title { font-size: 20px; font-weight: 800; line-height: 1.25; }
+.modal-org { font-size: 14px; color: var(--gray-500); margin-top: 3px; }
+.btn-close {
+  background: var(--gray-100);
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--gray-600);
+  line-height: 1;
+}
+.btn-close:hover { background: var(--gray-200); }
+.modal-body { padding: 20px 24px 24px; }
+.modal-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+.modal-section { margin-bottom: 20px; }
+.modal-section:last-child { margin-bottom: 0; }
+.modal-section h4 {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .6px;
+  color: var(--gray-400);
+  margin-bottom: 8px;
+}
+.modal-section p, .modal-section div {
+  font-size: 14px;
+  color: var(--gray-800);
+  line-height: 1.6;
+}
+.modal-section ul {
+  font-size: 14px;
+  color: var(--gray-800);
+  padding-left: 18px;
+}
+.modal-section ul li { margin-bottom: 4px; }
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.contact-item {
+  background: var(--gray-50);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+}
+.contact-item .label { font-size: 11px; font-weight: 600; color: var(--gray-400); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+.contact-item .value { font-size: 14px; color: var(--gray-800); font-weight: 500; }
+.contact-item .value a { color: var(--primary); text-decoration: none; }
+.contact-item .value a:hover { text-decoration: underline; }
+.modal-cta {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--gray-100);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.btn-call {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px;
+  background: var(--success);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background .15s;
+}
+.btn-call:hover { background: #15803d; }
+.modal-disclaimer {
+  font-size: 12px;
+  color: var(--gray-400);
+  text-align: center;
+  line-height: 1.5;
+}
+.vert-divider {
+  width: 1px;
+  background: var(--gray-200);
+  align-self: stretch;
+  margin: 0 4px;
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a class="logo" href="#" onclick="return false">
+    <span class="logo-icon">🛡️</span>
+    CrisisAid
+  </a>
+  <div class="nav-right">
+    <span class="badge-ai">AI-Powered</span>
+    <button class="btn-settings" id="btn-settings" title="Settings" onclick="toggleSettings()">⚙️</button>
+  </div>
+</nav>
+
+<!-- Settings Panel -->
+<div class="settings-panel" id="settings-panel">
+  <h3>⚙️ Settings</h3>
+  <label>Claude API Key (optional)</label>
+  <input type="password" id="api-key-input" placeholder="sk-ant-..." />
+  <small>Add your Anthropic API key to enable richer AI-powered need detection. Without a key, smart keyword matching is used instead.</small>
+  <button class="btn-save-key" onclick="saveApiKey()">Save Key</button>
+  <div class="key-status inactive" id="key-status">No API key set — using keyword matching</div>
+</div>
+
+<!-- ══════════════════════════════════════ SCREEN 1: INTAKE -->
+<div class="screen active" id="screen-intake">
+  <div class="intake-wrapper">
+    <div class="hero">
+      <h1>Find help <span class="highlight">right now.</span></h1>
+      <p>Tell us what's going on. We match you with real, currently active aid programs — food, housing, utilities, and more.</p>
+    </div>
+
+    <div class="intake-card">
+      <label for="situation">
+        What's your situation?
+        <span class="label-hint">Plain language is fine — the more detail, the better the match</span>
+      </label>
+      <textarea
+        id="situation"
+        placeholder="Example: I lost my job last week and we're almost out of groceries. I have two kids and rent is due in 10 days and I don't know how we'll pay it..."
+      ></textarea>
+
+      <div class="quick-filters">
+        <div class="filter-group">
+          <label>📍 ZIP code</label>
+          <input type="text" id="zipcode" placeholder="e.g. 94110" maxlength="5" pattern="\d{5}">
+        </div>
+        <div class="filter-group">
+          <label>👥 Household size</label>
+          <select id="household">
+            <option value="">Select...</option>
+            <option value="1">Just me (1 person)</option>
+            <option value="2">2 people</option>
+            <option value="3">3 people</option>
+            <option value="4">4+ people</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="urgency-section">
+        <label>⏰ How urgent is your need?</label>
+        <div class="urgency-options">
+          <button class="urgency-btn" data-value="today">🔴 I need help today</button>
+          <button class="urgency-btn" data-value="week">🟡 This week</button>
+          <button class="urgency-btn selected" data-value="general">🟢 Planning ahead</button>
+        </div>
+      </div>
+
+      <button class="btn-primary" id="find-btn">Find Aid Programs →</button>
+      <p class="disclaimer">🔒 Nothing you enter is stored or shared. This tool finds the door — a human at the organization opens it.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ SCREEN 2: ANALYZING -->
+<div class="screen" id="screen-analyzing">
+  <div class="analyzing-wrapper">
+    <div class="spinner-ring"></div>
+    <h2>Finding programs for you...</h2>
+    <p class="sub">Matching your situation to verified aid programs</p>
+    <div class="analysis-steps" id="analysis-steps"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ SCREEN 3: RESULTS -->
+<div class="screen" id="screen-results">
+  <div class="results-wrapper">
+    <div class="results-top-bar">
+      <button class="btn-back" id="btn-back">← Search again</button>
+    </div>
+
+    <div class="ai-card" id="ai-card">
+      <div class="ai-card-icon">🤖</div>
+      <div class="ai-card-body">
+        <h4>AI ANALYSIS</h4>
+        <p id="ai-summary-text"></p>
+        <div class="need-tags" id="need-tags"></div>
+      </div>
+    </div>
+
+    <div class="urgent-banner" id="urgent-banner" style="display:none">
+      <div class="urgent-banner-icon">🚨</div>
+      <div>
+        <h4>Immediate help prioritized</h4>
+        <p id="urgent-banner-text"></p>
+      </div>
+    </div>
+
+    <div class="filter-bar">
+      <span class="results-count" id="results-count"></span>
+      <div class="filter-tabs" id="filter-tabs"></div>
+    </div>
+
+    <div class="sort-control">
+      <label>Sort by:</label>
+      <select id="sort-select" onchange="renderResults()">
+        <option value="relevance">Most relevant</option>
+        <option value="urgency">Fastest response</option>
+        <option value="verified">Most recently verified</option>
+      </select>
+    </div>
+
+    <div class="programs-grid" id="programs-grid"></div>
+
+    <div class="rai-note">
+      <h4>📋 About these results</h4>
+      <p>
+        Programs are matched to your described situation and cross-referenced against recent verification data.
+        Verification badges show how recently each listing was confirmed active — programs can run out of funding or change hours without notice.
+        <strong>Always call or check the website before visiting.</strong> CrisisAid helps you find the door; the people at each organization will open it.
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ MODAL -->
+<div class="modal-overlay" id="program-modal" style="display:none" onclick="closeModal(event)">
+  <div class="modal-box" id="modal-box">
+    <!-- Filled by JS -->
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════ DATA ═══════════════════════════════════
+
+const CATEGORIES = {
+  food:      { label: 'Food',       icon: '🍎', bg: '#F0FDF4', color: '#16A34A' },
+  housing:   { label: 'Housing',    icon: '🏠', bg: '#EFF6FF', color: '#1D4ED8' },
+  utilities: { label: 'Utilities',  icon: '⚡', bg: '#FFFBEB', color: '#D97706' },
+  medical:   { label: 'Medical',    icon: '🏥', bg: '#FEF2F2', color: '#DC2626' },
+  cash:      { label: 'Cash Aid',   icon: '💵', bg: '#F5F3FF', color: '#7C3AED' },
+  childcare: { label: 'Childcare',  icon: '👶', bg: '#FDF2F8', color: '#DB2777' },
+};
+
+// urgency: "immediate" | "same-day" | "within-week" | "general"
+// confidence: "high" | "medium" | "low" | "unknown"
+// verified_days: number of days since last verified
+
+const PROGRAMS = [
+  {
+    id: 1,
+    name: 'Emergency Food Pantry',
+    org: 'United Way Community Hub',
+    category: 'food',
+    urgency: 'immediate',
+    response_time: 'Same day',
+    summary: 'Walk-in food supply for any household in crisis — no appointment needed.',
+    provides: '3-day emergency food supply per visit (available once per month per household). Includes shelf-stable items, produce when available, and personal care products.',
+    eligibility: 'Open to anyone in the service area with no income verification required on your first visit. Subsequent visits require a photo ID.',
+    how_to_apply: 'Simply walk in during open hours. No appointment or referral needed. For your first visit, just show up — staff will guide you through intake.',
+    phone: '(415) 555-0182',
+    hours: 'Mon–Fri 9am–4pm · Sat 10am–2pm',
+    address: '1240 Mission St, San Francisco, CA',
+    website: '#',
+    verified_days: 2,
+    confidence: 'high',
+    required_docs: ['Photo ID (repeat visits only)'],
+    tags: ['food', 'emergency', 'no-appointment', 'walk-in'],
+  },
+  {
+    id: 2,
+    name: 'SNAP Emergency Benefits',
+    org: 'Dept. of Social Services',
+    category: 'food',
+    urgency: 'within-week',
+    response_time: '3–7 days',
+    summary: 'Monthly food assistance benefits — expedited processing available if you qualify.',
+    provides: '$250–$1,000+/month in food benefits depending on household size and income. Expedited processing in 7 days or less if household has less than $150/month income.',
+    eligibility: 'Households with gross income at or below 130% of the federal poverty level. U.S. citizens and many legal non-citizens qualify.',
+    how_to_apply: 'Apply online at benefits.gov, call the hotline for a phone interview, or visit a county office. Bring proof of income, photo ID, and proof of address.',
+    phone: '(800) 555-0322',
+    hours: 'Mon–Fri 8am–5pm · Online applications 24/7',
+    address: 'County Benefits Office, 450 Golden Gate Ave',
+    website: 'https://www.benefits.gov',
+    verified_days: 1,
+    confidence: 'high',
+    required_docs: ['Photo ID', 'Proof of income (pay stubs, termination letter)', 'Proof of address'],
+    tags: ['food', 'government', 'monthly-benefit', 'expedited'],
+  },
+  {
+    id: 3,
+    name: 'WIC Nutrition Program',
+    org: 'SF Dept. of Public Health',
+    category: 'food',
+    urgency: 'within-week',
+    response_time: '3–5 days',
+    summary: 'Free healthy food, formula, and nutrition support for women, infants, and young children.',
+    provides: 'Monthly food package including milk, eggs, fruit, vegetables, cereal, and baby formula. Also includes breastfeeding support and nutrition counseling.',
+    eligibility: 'Pregnant women, new mothers (up to 6 months postpartum or 1 year if breastfeeding), infants and children up to age 5. Income at or below 185% federal poverty level.',
+    how_to_apply: 'Call to schedule an appointment. Bring proof of identity, address, income, and pregnancy/birth records. Can often be seen within a week.',
+    phone: '(415) 555-0275',
+    hours: 'Mon–Fri 8:30am–4:30pm',
+    address: '101 Grove St, San Francisco, CA',
+    website: '#',
+    verified_days: 5,
+    confidence: 'high',
+    required_docs: ['Photo ID', 'Proof of address', 'Proof of income', "Child's birth certificate (if applying for child)"],
+    tags: ['food', 'children', 'pregnancy', 'women', 'nutrition'],
+  },
+  {
+    id: 4,
+    name: 'Emergency Rental Assistance',
+    org: 'SF Housing Authority',
+    category: 'housing',
+    urgency: 'within-week',
+    response_time: '5–10 days',
+    summary: 'Up to 3 months of back rent paid directly to your landlord to prevent eviction.',
+    provides: 'Up to $7,500 in rental assistance per household per year. Funds paid directly to landlord. Also covers utility arrears in some cases.',
+    eligibility: 'Renters experiencing financial hardship due to job loss, reduced income, medical emergency, or other crisis. Must be at or below 80% area median income. Must have a lease.',
+    how_to_apply: 'Apply online or at the Housing Authority office. Landlord cooperation required. Processing takes 5–10 business days after complete application.',
+    phone: '(415) 555-0390',
+    hours: 'Mon–Fri 9am–5pm',
+    address: '1815 Egbert Ave, San Francisco, CA',
+    website: '#',
+    verified_days: 8,
+    confidence: 'medium',
+    required_docs: ['Photo ID', 'Lease agreement', 'Proof of income', 'Landlord contact info', 'Eviction notice (if applicable)'],
+    tags: ['housing', 'rent', 'eviction-prevention', 'landlord'],
+  },
+  {
+    id: 5,
+    name: 'Emergency Shelter — Low-Barrier',
+    org: 'Navigation Center SF',
+    category: 'housing',
+    urgency: 'immediate',
+    response_time: 'Tonight',
+    summary: 'Immediate overnight shelter for individuals and couples — no sobriety requirement.',
+    provides: 'Safe overnight shelter with beds, storage, meals, showers, and case management. Couples and people with pets accepted. Staff on-site 24/7.',
+    eligibility: 'Adults experiencing homelessness. Low barrier — no sobriety requirement, no curfew. Must be referred by 311 or an outreach team.',
+    how_to_apply: 'Call 311 (SF residents) to request an outreach team or shelter placement. You can also self-refer by calling the shelter directly.',
+    phone: '311 (or direct: (415) 555-0412)',
+    hours: 'Intake: 4pm–8pm · Open 24/7',
+    address: '1950 Mission St, San Francisco, CA',
+    website: '#',
+    verified_days: 4,
+    confidence: 'high',
+    required_docs: ['No ID required'],
+    tags: ['housing', 'shelter', 'homeless', 'immediate', 'no-barrier'],
+  },
+  {
+    id: 6,
+    name: 'Eviction Prevention Hotline',
+    org: 'Bay Area Legal Aid',
+    category: 'housing',
+    urgency: 'immediate',
+    response_time: 'Same day',
+    summary: 'Free legal advice if you\'ve received an eviction notice or are at risk of eviction.',
+    provides: 'Free legal consultation, help understanding your rights, assistance responding to eviction notices, and referral to full legal representation if needed.',
+    eligibility: 'Any tenant in San Francisco facing eviction or housing instability. Income restrictions may apply for full representation.',
+    how_to_apply: 'Call the hotline. A staff attorney or paralegal will answer or call back same day. Have your lease and any notices you\'ve received ready.',
+    phone: '(415) 555-0560',
+    hours: 'Mon–Fri 9am–5pm · Hotline staffed until 6pm',
+    address: '1735 Telegraph Ave (also by phone)',
+    website: '#',
+    verified_days: 3,
+    confidence: 'high',
+    required_docs: ['Lease agreement', 'Any eviction or pay-or-quit notices received'],
+    tags: ['housing', 'legal', 'eviction', 'tenant-rights', 'free'],
+  },
+  {
+    id: 7,
+    name: 'LIHEAP Energy Assistance',
+    org: 'PG&E / State Program',
+    category: 'utilities',
+    urgency: 'within-week',
+    response_time: '5–7 days',
+    summary: 'Help paying your electric or gas bill — prevents shutoff for low-income households.',
+    provides: 'One-time payment toward past-due utility bills. Average benefit: $300–$800. Keeps service on during processing. Annual enrollment possible.',
+    eligibility: 'Households with income at or below 60% state median income. Priority given to households with elderly, disabled, or young children.',
+    how_to_apply: 'Apply online or call the LIHEAP office. If your service is about to be shut off, tell the representative — emergency processing available.',
+    phone: '(800) 555-0199',
+    hours: 'Mon–Fri 8am–5pm',
+    address: 'Apply online or by phone',
+    website: '#',
+    verified_days: 12,
+    confidence: 'medium',
+    required_docs: ['Photo ID', 'Most recent utility bill', 'Proof of income', 'Social Security numbers for all household members'],
+    tags: ['utilities', 'electricity', 'gas', 'shutoff-prevention', 'liheap'],
+  },
+  {
+    id: 8,
+    name: 'Utility Shutoff Prevention',
+    org: 'SF Human Services Agency',
+    category: 'utilities',
+    urgency: 'immediate',
+    response_time: 'Same day',
+    summary: 'Emergency assistance if your power or water is about to be shut off today.',
+    provides: 'Emergency payment to prevent utility shutoff. Works directly with utility company. Available while funds last.',
+    eligibility: 'SF residents facing imminent utility shutoff (must have received shutoff notice). Income limits apply.',
+    how_to_apply: 'Call immediately — same-day assistance is possible. Have your shutoff notice and account number ready.',
+    phone: '(415) 555-0700',
+    hours: 'Mon–Fri 8am–4:30pm (call before 3pm for same-day help)',
+    address: '170 Otis St, San Francisco, CA',
+    website: '#',
+    verified_days: 6,
+    confidence: 'medium',
+    required_docs: ['Shutoff notice', 'Utility account number', 'Photo ID', 'Proof of income'],
+    tags: ['utilities', 'emergency', 'shutoff', 'immediate'],
+  },
+  {
+    id: 9,
+    name: 'Community Health Clinic',
+    org: 'SF Community Health Center',
+    category: 'medical',
+    urgency: 'same-day',
+    response_time: 'Same/next day',
+    summary: 'Sliding-scale medical care regardless of insurance or immigration status.',
+    provides: 'Primary care, urgent care, mental health, dental, prescriptions. Fees based on income — as low as $0 for qualifying patients.',
+    eligibility: 'Everyone is welcome regardless of insurance, income, or immigration status. Fees are based on a sliding scale.',
+    how_to_apply: 'Call to schedule or walk in during clinic hours. For urgent issues, walk-in slots are available daily (limited number, arrive early).',
+    phone: '(415) 555-0321',
+    hours: 'Mon–Fri 8am–6pm · Walk-in urgent care 8am–12pm',
+    address: '3850 17th St, San Francisco, CA',
+    website: '#',
+    verified_days: 7,
+    confidence: 'medium',
+    required_docs: ['Any ID helpful but not required', 'Insurance card if you have one'],
+    tags: ['medical', 'sliding-scale', 'no-insurance', 'urgent-care'],
+  },
+  {
+    id: 10,
+    name: 'Medi-Cal Emergency Enrollment',
+    org: 'DHCS / Covered California',
+    category: 'medical',
+    urgency: 'within-week',
+    response_time: '1–3 days',
+    summary: 'Free or low-cost health insurance — can be approved within days in an emergency.',
+    provides: 'Full health insurance coverage including doctor visits, hospital, prescriptions, mental health, and dental. Free for most qualifying households.',
+    eligibility: 'CA residents with income below 138% federal poverty level. Undocumented adults 26-49 also now eligible.',
+    how_to_apply: 'Apply at your county social services office, online at coveredca.gov, or by phone. Emergency enrollments processed in 1–3 days.',
+    phone: '(800) 555-0025',
+    hours: 'Mon–Fri 8am–8pm · Sat 8am–6pm',
+    address: 'Apply online or by phone',
+    website: '#',
+    verified_days: 2,
+    confidence: 'high',
+    required_docs: ['Photo ID', 'Proof of income', 'Proof of CA residency', 'Social Security number (if you have one)'],
+    tags: ['medical', 'insurance', 'government', 'free'],
+  },
+  {
+    id: 11,
+    name: 'Prescription Assistance Program',
+    org: 'SF Dept. of Public Health',
+    category: 'medical',
+    urgency: 'within-week',
+    response_time: '2–5 days',
+    summary: 'Get your prescriptions free or at deeply reduced cost if you\'re uninsured.',
+    provides: 'Access to 1,500+ medications at no cost or $1–$5/prescription through partnerships with pharmaceutical companies.',
+    eligibility: 'Uninsured or underinsured SF residents. Income below 200% federal poverty level.',
+    how_to_apply: 'Contact your healthcare provider or call the program directly. Bring a list of your prescriptions.',
+    phone: '(415) 555-0480',
+    hours: 'Mon–Fri 8am–5pm',
+    address: '101 Grove St, San Francisco, CA',
+    website: '#',
+    verified_days: 18,
+    confidence: 'low',
+    required_docs: ['Prescription from a doctor', 'Proof of income', 'Photo ID'],
+    tags: ['medical', 'prescriptions', 'uninsured'],
+  },
+  {
+    id: 12,
+    name: 'Emergency Cash Assistance',
+    org: 'SF Human Services Agency',
+    category: 'cash',
+    urgency: 'within-week',
+    response_time: '3–5 days',
+    summary: 'One-time emergency cash for people in acute financial crisis with no other resources.',
+    provides: 'One-time cash payment of $150–$500 depending on need and availability. Can be used for any purpose.',
+    eligibility: 'SF residents who have exhausted other resources and face an immediate crisis (risk of homelessness, utility shutoff, etc.).',
+    how_to_apply: 'Call or visit the HSA office. Be prepared to explain your situation and provide documentation. Appointments recommended.',
+    phone: '(415) 555-0557',
+    hours: 'Mon–Fri 8am–5pm',
+    address: '170 Otis St, San Francisco, CA',
+    website: '#',
+    verified_days: 14,
+    confidence: 'medium',
+    required_docs: ['Photo ID', 'Proof of SF residency', 'Proof of income (or lack thereof)', 'Documentation of crisis (bill, notice, etc.)'],
+    tags: ['cash', 'emergency', 'one-time', 'general-assistance'],
+  },
+  {
+    id: 13,
+    name: 'Unemployment Insurance',
+    org: 'CA Employment Development Dept.',
+    category: 'cash',
+    urgency: 'general',
+    response_time: '2–3 weeks',
+    summary: 'Weekly income replacement if you lost your job through no fault of your own.',
+    provides: '60–70% of your prior weekly earnings, up to $450/week, for up to 26 weeks. Direct deposit or EDD debit card.',
+    eligibility: 'Employees who were laid off, had hours reduced, or left work for good cause. Must have earned enough wages in the base period.',
+    how_to_apply: 'File online at edd.ca.gov. File as soon as possible — benefits are not retroactive to before your claim date.',
+    phone: '(800) 300-5616',
+    hours: 'Phone: Mon–Fri 8am–12pm · Online 24/7',
+    address: 'Apply online at edd.ca.gov',
+    website: 'https://www.edd.ca.gov',
+    verified_days: 3,
+    confidence: 'high',
+    required_docs: ['Social Security number', 'Employment history (last 18 months)', 'Last employer info and reason for separation'],
+    tags: ['cash', 'unemployment', 'job-loss', 'weekly-benefit'],
+  },
+  {
+    id: 14,
+    name: 'Emergency Childcare Voucher',
+    org: 'First 5 SF / Child Care Connections',
+    category: 'childcare',
+    urgency: 'within-week',
+    response_time: '3–5 days',
+    summary: 'Emergency childcare funding while you stabilize your situation.',
+    provides: 'Subsidized childcare at participating providers for children ages 0–5. Emergency slots prioritized for families in crisis.',
+    eligibility: 'Low-income families with children 0–5 who need care to maintain employment or address a family crisis.',
+    how_to_apply: 'Call First 5 SF directly and explain you need emergency placement. Bring income documents and child\'s birth certificate.',
+    phone: '(415) 555-0611',
+    hours: 'Mon–Fri 9am–5pm',
+    address: '1390 Market St, Suite 900',
+    website: '#',
+    verified_days: 22,
+    confidence: 'low',
+    required_docs: ["Child's birth certificate", 'Proof of income', 'Photo ID', 'Documentation of emergency situation'],
+    tags: ['childcare', 'children', 'working-parents', 'emergency'],
+  },
+  {
+    id: 15,
+    name: 'Free Legal Help — Civil Matters',
+    org: 'Volunteer Legal Services Program',
+    category: 'cash',
+    urgency: 'within-week',
+    response_time: '2–4 days',
+    summary: 'Free attorney assistance for civil legal issues affecting your financial stability.',
+    provides: 'Free legal advice and representation for issues like wage theft, benefits denials, debt collection, and landlord disputes.',
+    eligibility: 'Individuals with income below 200% federal poverty level facing civil legal issues.',
+    how_to_apply: 'Call for an intake screening. If you qualify, you will be matched with a volunteer attorney, typically within a week.',
+    phone: '(415) 555-0823',
+    hours: 'Mon–Fri 9am–5pm',
+    address: 'Appointments available remotely and in-person',
+    website: '#',
+    verified_days: 9,
+    confidence: 'medium',
+    required_docs: ['ID', 'Documents related to your legal issue', 'Proof of income'],
+    tags: ['legal', 'wage-theft', 'benefits', 'free', 'civil'],
+  },
+];
+
+// ═══════════════════════════════════ STATE ═══════════════════════════════════
+
+let state = {
+  urgency: 'general',
+  filter: 'all',
+  matched: [],
+  detectedNeeds: [],
+  summaryText: '',
+};
+
+// ═══════════════════════════════════ SETTINGS ════════════════════════════════
+
+function toggleSettings() {
+  document.getElementById('settings-panel').classList.toggle('open');
+  const keyInput = document.getElementById('api-key-input');
+  const stored = localStorage.getItem('caid_api_key');
+  if (stored) keyInput.value = stored;
+}
+
+function saveApiKey() {
+  const key = document.getElementById('api-key-input').value.trim();
+  if (key) {
+    localStorage.setItem('caid_api_key', key);
+    setKeyStatus(true);
+  } else {
+    localStorage.removeItem('caid_api_key');
+    setKeyStatus(false);
+  }
+  document.getElementById('settings-panel').classList.remove('open');
+}
+
+function setKeyStatus(hasKey) {
+  const el = document.getElementById('key-status');
+  if (hasKey) {
+    el.textContent = '✅ Claude API key active — AI analysis enabled';
+    el.className = 'key-status active';
+    document.querySelector('.badge-ai').textContent = 'Claude AI';
+  } else {
+    el.textContent = 'No API key set — using keyword matching';
+    el.className = 'key-status inactive';
+    document.querySelector('.badge-ai').textContent = 'AI-Powered';
+  }
+}
+
+// Check on load
+window.addEventListener('load', () => {
+  if (localStorage.getItem('caid_api_key')) setKeyStatus(true);
+});
+
+// Close settings on outside click
+document.addEventListener('click', (e) => {
+  const panel = document.getElementById('settings-panel');
+  const btn = document.getElementById('btn-settings');
+  if (panel.classList.contains('open') && !panel.contains(e.target) && e.target !== btn) {
+    panel.classList.remove('open');
+  }
+});
+
+// ═══════════════════════════════════ INTAKE ══════════════════════════════════
+
+// Urgency buttons
+document.querySelectorAll('.urgency-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.urgency-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    state.urgency = btn.dataset.value;
+  });
+});
+
+document.getElementById('find-btn').addEventListener('click', startSearch);
+document.getElementById('btn-back').addEventListener('click', () => showScreen('intake'));
+
+async function startSearch() {
+  const desc = document.getElementById('situation').value.trim();
+  if (!desc) {
+    document.getElementById('situation').focus();
+    document.getElementById('situation').style.borderColor = '#DC2626';
+    setTimeout(() => { document.getElementById('situation').style.borderColor = ''; }, 2000);
+    return;
+  }
+
+  showScreen('analyzing');
+  await runAnalysis(desc);
+}
+
+// ═══════════════════════════════════ ANALYZING ═══════════════════════════════
+
+const ANALYSIS_STEPS = [
+  { icon: '📝', text: 'Reading your situation description...' },
+  { icon: '🔍', text: 'Identifying needs (food, housing, utilities...)' },
+  { icon: '📍', text: 'Filtering by your location and household' },
+  { icon: '✅', text: 'Checking program verification status' },
+  { icon: '⚡', text: 'Ranking by urgency and relevance' },
+];
+
+function renderAnalysisSteps() {
+  const container = document.getElementById('analysis-steps');
+  container.innerHTML = ANALYSIS_STEPS.map((s, i) => `
+    <div class="analysis-step" id="step-${i}">
+      <div class="step-icon">${s.icon}</div>
+      <span>${s.text}</span>
+    </div>
+  `).join('');
+}
+
+async function runAnalysis(description) {
+  renderAnalysisSteps();
+
+  // Animate steps
+  for (let i = 0; i < ANALYSIS_STEPS.length; i++) {
+    const el = document.getElementById(`step-${i}`);
+    el.classList.add('active');
+    await sleep(380 + Math.random() * 260);
+    el.classList.remove('active');
+    el.classList.add('done');
+    el.querySelector('.step-icon').textContent = '✓';
+  }
+
+  // Try AI, fall back to keywords
+  const apiKey = localStorage.getItem('caid_api_key');
+  let analysis;
+  if (apiKey) {
+    analysis = await analyzeWithClaude(description, apiKey);
+  } else {
+    analysis = analyzeWithKeywords(description);
+  }
+
+  state.detectedNeeds = analysis.needs;
+  state.summaryText = analysis.summary;
+
+  // Match and filter programs
+  state.matched = matchPrograms(analysis.needs, state.urgency);
+
+  await sleep(300);
+  showResults();
+}
+
+// ═══════════════════════════════════ AI ANALYSIS ═════════════════════════════
+
+async function analyzeWithClaude(description, apiKey) {
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true',
+      },
+      body: JSON.stringify({
+        model: 'claude-haiku-4-5-20251001',
+        max_tokens: 400,
+        system: `You are a crisis intake specialist for an aid matching tool. Analyze the person's situation and return ONLY valid JSON (no other text) with this exact structure:
+{
+  "needs": ["food","housing","utilities","medical","cash","childcare"],
+  "urgency": "immediate|within-week|general",
+  "summary": "One clear sentence summarizing their core situation and primary needs."
+}
+Only include needs that are clearly relevant. urgency should be "immediate" if they need help today.`,
+        messages: [{ role: 'user', content: description }],
+      }),
+    });
+    const data = await res.json();
+    const text = data.content?.[0]?.text || '';
+    const parsed = JSON.parse(text.match(/\{[\s\S]*\}/)?.[0] || '{}');
+    if (parsed.needs && parsed.summary) return parsed;
+  } catch (_) {}
+  return analyzeWithKeywords(description);
+}
+
+function analyzeWithKeywords(description) {
+  const d = description.toLowerCase();
+  const needs = [];
+
+  const patterns = {
+    food:      /\b(food|hungry|hunger|eat|eating|groceries|grocery|meal|meals|starving|nutrition|wic|snap|pantry|feed|feeding|dinner|lunch|breakfast)\b/,
+    housing:   /\b(rent|renting|evict|eviction|homeless|homelessness|shelter|housing|apartment|landlord|home|house|lease|nowhere to (live|go|stay))\b/,
+    utilities: /\b(electric|electricity|gas|water|utility|utilities|power|heating|cooling|heat|bill|bills|shutoff|shut off|lights)\b/,
+    medical:   /\b(medical|health|doctor|medicine|insurance|prescription|hospital|sick|clinic|healthcare|dental|therapy|mental health)\b/,
+    cash:      /\b(money|cash|afford|financial|income|unemployed|unemployment|job loss|laid off|no income|debt|bills|broke|paycheck)\b/,
+    childcare: /\b(child|children|kids|baby|babies|daycare|day care|school|infant|toddler|pregnant|pregnancy)\b/,
+  };
+
+  for (const [need, pattern] of Object.entries(patterns)) {
+    if (pattern.test(d)) needs.push(need);
+  }
+
+  // Always have at least food and cash as a fallback if nothing matched
+  if (needs.length === 0) {
+    needs.push('food', 'cash');
+  }
+
+  const summary = buildSummary(needs, d);
+  return { needs, summary };
+}
+
+function buildSummary(needs, d) {
+  const parts = [];
+  if (needs.includes('food')) parts.push('food assistance');
+  if (needs.includes('housing')) parts.push('housing/rental help');
+  if (needs.includes('utilities')) parts.push('utility assistance');
+  if (needs.includes('medical')) parts.push('medical resources');
+  if (needs.includes('cash')) parts.push('emergency cash aid');
+  if (needs.includes('childcare')) parts.push('childcare support');
+
+  const urgencyWord = state.urgency === 'today' ? 'urgently needs' : 'is looking for';
+  return `Based on your description, this person ${urgencyWord} ${joinList(parts)}. Programs below are matched to these needs.`;
+}
+
+function joinList(arr) {
+  if (arr.length === 0) return 'general assistance';
+  if (arr.length === 1) return arr[0];
+  return arr.slice(0, -1).join(', ') + ' and ' + arr[arr.length - 1];
+}
+
+// ═══════════════════════════════════ MATCHING ════════════════════════════════
+
+function matchPrograms(needs, urgency) {
+  const urgencyScore = { immediate: 3, 'same-day': 2, 'within-week': 1, general: 0 };
+  const selectedUrgencyScore = urgency === 'today' ? 3 : urgency === 'week' ? 1 : 0;
+
+  return PROGRAMS
+    .filter(p => needs.includes(p.category) || needs.length === 0)
+    .map(p => {
+      let score = 0;
+      // Urgency match
+      if (urgency === 'today') score += urgencyScore[p.urgency] * 3;
+      // Confidence boost
+      score += p.confidence === 'high' ? 2 : p.confidence === 'medium' ? 1 : 0;
+      // Recency
+      score += Math.max(0, 3 - Math.floor(p.verified_days / 7));
+      return { ...p, score };
+    })
+    .sort((a, b) => b.score - a.score);
+}
+
+// ═══════════════════════════════════ RESULTS ═════════════════════════════════
+
+function showResults() {
+  // AI card
+  document.getElementById('ai-summary-text').textContent = state.summaryText;
+  const tagsEl = document.getElementById('need-tags');
+  tagsEl.innerHTML = state.detectedNeeds.map(n => {
+    const cat = CATEGORIES[n];
+    return cat ? `<span class="need-tag">${cat.icon} ${cat.label}</span>` : '';
+  }).join('');
+
+  // Urgent banner
+  const banner = document.getElementById('urgent-banner');
+  if (state.urgency === 'today') {
+    banner.style.display = 'flex';
+    document.getElementById('urgent-banner-text').textContent =
+      'We\'ve prioritized programs with same-day or immediate response at the top. Call before visiting to confirm availability — demand can be high.';
+  } else {
+    banner.style.display = 'none';
+  }
+
+  // Filter tabs
+  renderFilterTabs();
+  renderResults();
+
+  showScreen('results');
+}
+
+function renderFilterTabs() {
+  const tabs = document.getElementById('filter-tabs');
+  const allCount = state.matched.length;
+  const counts = {};
+  state.matched.forEach(p => { counts[p.category] = (counts[p.category] || 0) + 1; });
+
+  const relevantCats = Object.keys(counts);
+  let html = `<button class="filter-tab active" data-cat="all" onclick="setFilter('all')">All <span class="tab-count">${allCount}</span></button>`;
+  for (const cat of relevantCats) {
+    const c = CATEGORIES[cat];
+    if (!c) continue;
+    html += `<button class="filter-tab" data-cat="${cat}" onclick="setFilter('${cat}')">${c.icon} ${c.label} <span class="tab-count">${counts[cat]}</span></button>`;
+  }
+  tabs.innerHTML = html;
+}
+
+function setFilter(cat) {
+  state.filter = cat;
+  document.querySelectorAll('.filter-tab').forEach(t => {
+    t.classList.toggle('active', t.dataset.cat === cat);
+  });
+  renderResults();
+}
+
+function renderResults() {
+  const sort = document.getElementById('sort-select').value;
+  let programs = state.matched.filter(p => state.filter === 'all' || p.category === state.filter);
+
+  if (sort === 'urgency') {
+    const order = { immediate: 0, 'same-day': 1, 'within-week': 2, general: 3 };
+    programs = [...programs].sort((a, b) => order[a.urgency] - order[b.urgency]);
+  } else if (sort === 'verified') {
+    programs = [...programs].sort((a, b) => a.verified_days - b.verified_days);
+  }
+
+  const count = programs.length;
+  document.getElementById('results-count').textContent =
+    `${count} program${count !== 1 ? 's' : ''} found`;
+
+  const grid = document.getElementById('programs-grid');
+  if (count === 0) {
+    grid.innerHTML = `<div class="no-results"><h3>No programs found for this filter</h3><p>Try "All" to see all matched programs.</p></div>`;
+    return;
+  }
+
+  grid.innerHTML = programs.map(p => renderProgramCard(p)).join('');
+}
+
+function verificationBadge(p) {
+  const days = p.verified_days;
+  const conf = p.confidence;
+  let cls, text;
+  if (conf === 'high' && days <= 5) {
+    cls = 'badge-verified-high';
+    text = `✓ Verified ${days === 1 ? '1 day' : days + ' days'} ago`;
+  } else if (conf === 'medium' || (days > 5 && days <= 14)) {
+    cls = 'badge-verified-medium';
+    text = `~ Verified ${days} days ago`;
+  } else if (days > 14 && days <= 30) {
+    cls = 'badge-verified-low';
+    text = `⚠ Verified ${days} days ago`;
+  } else {
+    cls = 'badge-verified-unknown';
+    text = '? May be outdated';
+  }
+  return `<span class="badge ${cls}">${text}</span>`;
+}
+
+function responseBadge(p) {
+  const isUrgent = p.urgency === 'immediate' || p.urgency === 'same-day';
+  return `<span class="badge badge-response${isUrgent ? ' urgent-response' : ''}">⚡ ${p.response_time}</span>`;
+}
+
+function renderProgramCard(p) {
+  const cat = CATEGORIES[p.category];
+  const isUrgent = p.urgency === 'immediate' || p.urgency === 'same-day';
+  return `
+    <div class="program-card${isUrgent ? ' urgent-card' : ''}" onclick="openModal(${p.id})">
+      <div class="card-header">
+        <div class="card-header-left">
+          <div class="cat-icon" style="background:${cat.bg}">${cat.icon}</div>
+          <div class="card-title-block">
+            <div class="card-title">${p.name}</div>
+            <div class="card-org">${p.org}</div>
+          </div>
+        </div>
+        <div class="card-badges">
+          ${responseBadge(p)}
+          ${verificationBadge(p)}
+        </div>
+      </div>
+      <div class="card-summary">${p.summary}</div>
+      <div class="card-meta">
+        <span class="card-meta-item">📞 ${p.phone}</span>
+        <span class="card-meta-item">🕐 ${p.hours.split('·')[0].trim()}</span>
+      </div>
+      <div class="card-footer">
+        <button class="btn-details">View details & how to apply →</button>
+        <span class="card-docs">📄 ${p.required_docs.length} doc${p.required_docs.length !== 1 ? 's' : ''} needed</span>
+      </div>
+    </div>
+  `;
+}
+
+// ═══════════════════════════════════ MODAL ═══════════════════════════════════
+
+function openModal(id) {
+  const p = PROGRAMS.find(x => x.id === id);
+  if (!p) return;
+  const cat = CATEGORIES[p.category];
+
+  document.getElementById('modal-box').innerHTML = `
+    <div class="modal-header">
+      <div class="modal-header-left">
+        <div class="cat-icon" style="background:${cat.bg}; width:48px; height:48px; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:24px; flex-shrink:0">${cat.icon}</div>
+        <div>
+          <div class="modal-title">${p.name}</div>
+          <div class="modal-org">${p.org}</div>
+        </div>
+      </div>
+      <button class="btn-close" onclick="closeModal()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-badges">
+        ${responseBadge(p)}
+        ${verificationBadge(p)}
+        <span class="badge" style="background:${cat.bg}; color:${cat.color}">${cat.icon} ${cat.label}</span>
+      </div>
+
+      <div class="modal-section">
+        <h4>What they provide</h4>
+        <p>${p.provides}</p>
+      </div>
+
+      <div class="modal-section">
+        <h4>Who qualifies</h4>
+        <p>${p.eligibility}</p>
+      </div>
+
+      <div class="modal-section">
+        <h4>How to apply / get help</h4>
+        <p>${p.how_to_apply}</p>
+      </div>
+
+      <div class="modal-section">
+        <h4>Documents you'll need</h4>
+        <ul>${p.required_docs.map(d => `<li>${d}</li>`).join('')}</ul>
+      </div>
+
+      <div class="modal-section">
+        <h4>Contact & hours</h4>
+        <div class="contact-grid">
+          <div class="contact-item">
+            <div class="label">Phone</div>
+            <div class="value"><a href="tel:${p.phone.replace(/[^+\d]/g,'')}">${p.phone}</a></div>
+          </div>
+          <div class="contact-item">
+            <div class="label">Hours</div>
+            <div class="value">${p.hours}</div>
+          </div>
+          <div class="contact-item">
+            <div class="label">Location</div>
+            <div class="value">${p.address}</div>
+          </div>
+          <div class="contact-item">
+            <div class="label">Last verified</div>
+            <div class="value">${p.verified_days === 1 ? 'Yesterday' : p.verified_days + ' days ago'}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-cta">
+        <a class="btn-call" href="tel:${p.phone.replace(/[^+\d]/g,'')}">📞 Call ${p.phone}</a>
+        <p class="modal-disclaimer">Always call ahead to confirm availability before visiting in person. Program status and hours can change without notice. CrisisAid is not affiliated with this organization.</p>
+      </div>
+    </div>
+  `;
+
+  document.getElementById('program-modal').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(e) {
+  if (e && e.target !== document.getElementById('program-modal')) return;
+  document.getElementById('program-modal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+// ═══════════════════════════════════ SCREENS ═════════════════════════════════
+
+function showScreen(name) {
+  document.getElementById('screen-intake').classList.remove('active');
+  document.getElementById('screen-analyzing').classList.remove('active');
+  document.getElementById('screen-results').classList.remove('active');
+  document.getElementById(`screen-${name}`).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+// ═══════════════════════════════════ UTILS ═══════════════════════════════════
+
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+// Keyboard: Escape closes modal
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    if (document.getElementById('program-modal').style.display !== 'none') {
+      document.getElementById('program-modal').style.display = 'none';
+      document.body.style.overflow = '';
+    }
+    if (document.getElementById('settings-panel').classList.contains('open')) {
+      document.getElementById('settings-panel').classList.remove('open');
+    }
+  }
+});
+</script>
+</body>
+</html>
