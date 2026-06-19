@@ -3,22 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CrisisAid — Find Verified Help Now</title>
+<title>CrisisAid — Professional & Comforting</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://unpkg.com/lucide@latest"></script>
 <style>
 :root {
-  --primary: #2563eb;
-  --primary-light: #eff6ff;
+  /* Comforting, warm, clean palette */
+  --bg: #f8fafc;        /* Slate 50 - Very soft, cool off-white */
+  --surface: #ffffff;   /* Pure white for cards */
+  --fg: #0f172a;        /* Slate 900 - Soft black for text */
+  --primary: #2563eb;   /* Blue 600 - Trustworthy, calming blue */
   --primary-hover: #1d4ed8;
-  --urgent: #dc2626;
-  --urgent-light: #fef2f2;
-  --success: #059669;
-  --success-light: #ecfdf5;
-  --warning: #d97706;
-  --warning-light: #fffbeb;
+  --primary-light: #eff6ff;
   
   --gray-50: #f8fafc;
   --gray-100: #f1f5f9;
@@ -27,27 +25,24 @@
   --gray-400: #94a3b8;
   --gray-500: #64748b;
   --gray-600: #475569;
-  --gray-700: #334155;
-  --gray-800: #1e293b;
-  --gray-900: #0f172a;
   
-  --radius: 16px;
-  --radius-sm: 10px;
+  --urgent: #e11d48;    /* Rose 600 - Urgent but softer than pure red */
+  --urgent-light: #fff1f2;
   
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05);
-  --shadow-md: 0 10px 15px -3px rgb(0 0 0 / 0.05), 0 4px 6px -4px rgb(0 0 0 / 0.05);
-  --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.05), 0 8px 10px -6px rgb(0 0 0 / 0.05);
+  --radius-sm: 8px;
+  --radius-md: 16px;    /* Soft, approachable rounding */
+  --radius-lg: 24px;
   
-  --glass-bg: rgba(255, 255, 255, 0.85);
-  --glass-border: rgba(255, 255, 255, 0.3);
+  --shadow-sm: 0 2px 4px rgba(15, 23, 42, 0.04);
+  --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.06);
+  --shadow-lg: 0 20px 40px rgba(15, 23, 42, 0.08);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body {
   font-family: 'Inter', sans-serif;
-  background: var(--gray-50);
-  color: var(--gray-900);
+  background: var(--bg);
+  color: var(--fg);
   min-height: 100vh;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
@@ -55,66 +50,61 @@ body {
 
 /* ── NAV ── */
 .nav {
-  background: var(--glass-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border-bottom: 1px solid var(--gray-200);
-  padding: 0 24px;
-  height: 64px;
+  padding: 0 32px;
+  height: 72px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   position: sticky;
   top: 0;
   z-index: 100;
-  box-shadow: var(--shadow-sm);
 }
 .logo {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-weight: 800;
+  gap: 12px;
+  font-weight: 700;
   font-size: 20px;
   color: var(--primary);
   text-decoration: none;
   letter-spacing: -0.5px;
 }
-.nav-right { display: flex; align-items: center; gap: 16px; }
+.nav-right { display: flex; align-items: center; gap: 28px; }
+.nav-link {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--gray-600);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color .2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.nav-link:hover { color: var(--primary); }
 .btn-settings {
   background: none;
   border: none;
   cursor: pointer;
   color: var(--gray-500);
-  padding: 6px;
-  border-radius: 8px;
-  transition: all .2s;
+  transition: color .2s;
   display: flex;
   align-items: center;
-  justify-content: center;
+  padding: 8px;
+  border-radius: 50%;
 }
-.btn-settings:hover { 
-  background: var(--gray-100);
-  color: var(--gray-900); 
-}
-.badge-ai {
-  background: var(--primary-light);
-  color: var(--primary);
-  font-size: 12px;
-  font-weight: 600;
-  padding: 4px 10px;
-  border-radius: 20px;
-  letter-spacing: 0.2px;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
+.btn-settings:hover { color: var(--fg); background: var(--gray-100); }
 
 /* ── SCREENS ── */
 .screen { 
   display: none; 
   opacity: 0;
-  transition: opacity 0.4s ease, transform 0.4s ease;
-  transform: translateY(10px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  transform: translateY(15px);
 }
 .screen.active { 
   display: block; 
@@ -126,763 +116,551 @@ body {
 .settings-panel {
   display: none;
   position: fixed;
-  top: 72px;
-  right: 24px;
-  background: #fff;
+  top: 84px;
+  right: 32px;
+  background: var(--surface);
   border: 1px solid var(--gray-200);
-  border-radius: var(--radius);
-  padding: 24px;
+  padding: 28px;
   width: 360px;
   box-shadow: var(--shadow-lg);
   z-index: 200;
+  border-radius: var(--radius-md);
 }
-.settings-panel.open { display: block; animation: slideDown 0.2s ease-out; }
-@keyframes slideDown {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-.settings-panel h3 { display: flex; align-items: center; gap: 8px; font-size: 16px; font-weight: 700; margin-bottom: 16px; color: var(--gray-900); }
-.settings-panel label { font-size: 13px; font-weight: 600; color: var(--gray-700); display: block; margin-bottom: 6px; }
+.settings-panel.open { display: block; animation: fadeIn 0.2s ease-out; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+.settings-panel h3 { font-size: 16px; font-weight: 600; margin-bottom: 20px; display: flex; align-items: center; gap: 8px;}
+.settings-panel label { font-size: 13px; font-weight: 500; color: var(--gray-600); display: block; margin-bottom: 8px; }
 .settings-panel input {
   width: 100%;
-  padding: 10px 14px;
+  padding: 12px;
   border: 1px solid var(--gray-300);
   border-radius: var(--radius-sm);
   font-size: 14px;
   font-family: monospace;
   transition: border-color 0.2s, box-shadow 0.2s;
-}
-.settings-panel input:focus {
   outline: none;
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px var(--primary-light);
 }
-.settings-panel small { color: var(--gray-500); font-size: 12px; display: block; margin-top: 8px; line-height: 1.5; }
+.settings-panel input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-light); }
+.settings-panel small { color: var(--gray-500); font-size: 13px; display: block; margin-top: 12px; line-height: 1.5; }
 .btn-save-key {
-  margin-top: 16px;
-  background: var(--gray-900);
+  margin-top: 24px;
+  background: var(--primary);
   color: #fff;
   border: none;
-  border-radius: var(--radius-sm);
-  padding: 10px 20px;
+  padding: 12px;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
   cursor: pointer;
   width: 100%;
   transition: background .2s;
+  border-radius: var(--radius-sm);
 }
-.btn-save-key:hover { background: var(--gray-800); }
-.key-status { font-size: 13px; margin-top: 12px; font-weight: 500; display: flex; align-items: center; gap: 6px; }
-.key-status.active { color: var(--success); }
-.key-status.inactive { color: var(--gray-500); }
+.btn-save-key:hover { background: var(--primary-hover); }
+.key-status { font-size: 13px; margin-top: 16px; font-weight: 500; display: flex; align-items: center; gap: 6px; }
 
 /* ── INTAKE SCREEN ── */
 .intake-wrapper {
   max-width: 720px;
-  margin: 0 auto;
-  padding: 64px 24px 100px;
+  margin: 60px auto 120px;
+  padding: 0 24px;
 }
-.hero { text-align: center; margin-bottom: 48px; }
+.hero { margin-bottom: 48px; text-align: center; }
 .hero h1 {
-  font-size: clamp(32px, 6vw, 48px);
-  font-weight: 800;
-  line-height: 1.1;
+  font-size: clamp(32px, 5vw, 44px);
+  font-weight: 600;
+  line-height: 1.2;
   letter-spacing: -1px;
   margin-bottom: 16px;
-  color: var(--gray-900);
+  color: var(--fg);
 }
-.hero h1 .highlight { color: var(--primary); }
 .hero p {
   font-size: 18px;
-  color: var(--gray-600);
-  max-width: 540px;
-  margin: 0 auto;
+  color: var(--gray-500);
   line-height: 1.6;
+  font-weight: 400;
+  max-width: 500px;
+  margin: 0 auto;
 }
 
 .intake-card {
-  background: #fff;
-  border: 1px solid var(--gray-200);
-  border-radius: var(--radius);
-  padding: 40px;
+  background: var(--surface);
+  border-radius: var(--radius-md);
   box-shadow: var(--shadow-md);
+  padding: 40px;
+  border: 1px solid var(--gray-200);
 }
-.input-group { margin-bottom: 24px; }
-.input-group > label {
+
+.intake-form {
   display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  font-weight: 600;
-  font-size: 15px;
-  margin-bottom: 8px;
-  color: var(--gray-900);
+  flex-direction: column;
+  gap: 32px;
 }
-.label-hint { color: var(--gray-400); font-weight: 400; font-size: 13px; }
+.input-group > label {
+  display: block;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--fg);
+  margin-bottom: 12px;
+}
 textarea#situation {
   width: 100%;
   border: 1px solid var(--gray-300);
   border-radius: var(--radius-sm);
   padding: 16px;
-  font-size: 15px;
+  font-size: 16px;
   font-family: inherit;
   resize: vertical;
-  line-height: 1.6;
-  color: var(--gray-900);
-  transition: all .2s ease;
-  min-height: 140px;
-  background: var(--gray-50);
-}
-textarea#situation:focus {
+  line-height: 1.5;
+  color: var(--fg);
+  transition: border-color .3s, box-shadow .3s;
+  min-height: 120px;
   outline: none;
-  background: #fff;
-  border-color: var(--primary);
-  box-shadow: 0 0 0 4px var(--primary-light);
 }
+textarea#situation:focus { border-color: var(--primary); box-shadow: 0 0 0 4px var(--primary-light); }
 textarea#situation::placeholder { color: var(--gray-400); }
 
 .quick-filters {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 20px;
-  margin-bottom: 24px;
+  gap: 24px;
 }
 .filter-group label {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 14px;
+  display: block;
+  font-size: 13px;
   font-weight: 600;
-  color: var(--gray-800);
+  color: var(--gray-600);
   margin-bottom: 8px;
 }
 .filter-group input,
 .filter-group select {
   width: 100%;
-  padding: 12px 14px;
+  padding: 12px 16px;
   border: 1px solid var(--gray-300);
   border-radius: var(--radius-sm);
   font-size: 15px;
   font-family: inherit;
-  color: var(--gray-900);
-  background: var(--gray-50);
-  transition: all .2s;
-  -webkit-appearance: none;
+  color: var(--fg);
+  background: var(--surface);
+  transition: border-color .3s, box-shadow .3s;
+  outline: none;
 }
 .filter-group input:focus,
-.filter-group select:focus {
-  outline: none;
-  background: #fff;
-  border-color: var(--primary);
-  box-shadow: 0 0 0 4px var(--primary-light);
-}
+.filter-group select:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-light); }
 
-.urgency-section { margin-bottom: 32px; }
 .urgency-section > label {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 14px;
+  display: block;
+  font-size: 13px;
   font-weight: 600;
-  color: var(--gray-800);
+  color: var(--gray-600);
   margin-bottom: 12px;
 }
 .urgency-options {
   display: flex;
-  gap: 12px;
+  gap: 16px;
   flex-wrap: wrap;
 }
 .urgency-btn {
   flex: 1;
   min-width: 140px;
-  padding: 14px 16px;
-  border: 1px solid var(--gray-300);
-  border-radius: var(--radius-sm);
-  background: #fff;
+  padding: 16px;
+  border: 1px solid var(--gray-200);
+  background: var(--surface);
   font-size: 14px;
   font-weight: 500;
-  color: var(--gray-700);
+  color: var(--gray-600);
   cursor: pointer;
   transition: all .2s ease;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
+  gap: 12px;
+  border-radius: var(--radius-sm);
+  text-align: center;
 }
-.urgency-btn:hover { border-color: var(--gray-400); background: var(--gray-50); }
+.urgency-btn:hover { border-color: var(--gray-400); color: var(--fg); background: var(--gray-50); }
 .urgency-btn.selected {
-  background: var(--primary-light);
   border-color: var(--primary);
   color: var(--primary);
+  background: var(--primary-light);
+  box-shadow: 0 0 0 1px var(--primary);
 }
 .urgency-btn[data-value="today"].selected {
-  background: var(--urgent-light);
   border-color: var(--urgent);
   color: var(--urgent);
+  background: var(--urgent-light);
+  box-shadow: 0 0 0 1px var(--urgent);
 }
 
+.form-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 16px;
+  padding-top: 32px;
+  border-top: 1px solid var(--gray-200);
+}
 .btn-primary {
-  width: 100%;
-  padding: 16px;
+  padding: 14px 28px;
   background: var(--primary);
   color: #fff;
   border: none;
-  border-radius: var(--radius-sm);
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 15px;
+  font-weight: 500;
   cursor: pointer;
-  transition: all .2s ease;
+  transition: background .2s ease, transform .2s;
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 8px;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
 }
-.btn-primary:hover { background: var(--primary-hover); transform: translateY(-1px); box-shadow: var(--shadow); }
-.btn-primary:active { transform: translateY(1px); }
+.btn-primary:hover { background: var(--primary-hover); transform: translateY(-1px); }
 .disclaimer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  text-align: center;
   font-size: 13px;
   color: var(--gray-500);
-  margin-top: 16px;
-}
-
-/* ── ANALYZING SCREEN (SKELETONS) ── */
-.analyzing-wrapper {
-  max-width: 600px;
-  margin: 100px auto;
-  padding: 0 24px;
-}
-.analyzing-header {
-  text-align: center;
-  margin-bottom: 40px;
-}
-.analyzing-header h2 {
-  font-size: 24px;
-  font-weight: 800;
-  color: var(--gray-900);
-  margin-bottom: 8px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 12px;
+  gap: 6px;
 }
-.analyzing-header p {
-  color: var(--gray-500);
-  font-size: 16px;
-}
-.spinner-icon {
-  animation: spin 1s linear infinite;
-  color: var(--primary);
-}
-@keyframes spin { to { transform: rotate(360deg); } }
 
-.analysis-steps { display: flex; flex-direction: column; gap: 16px; }
+/* ── ANALYZING SCREEN ── */
+.analyzing-wrapper {
+  max-width: 480px;
+  margin: 140px auto;
+  padding: 40px;
+  background: var(--surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--gray-200);
+}
+.analyzing-header { margin-bottom: 32px; display: flex; align-items: center; gap: 12px; }
+.analyzing-header h2 {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--fg);
+}
+.analysis-steps { display: flex; flex-direction: column; gap: 20px; }
 .analysis-step {
   display: flex;
   align-items: center;
   gap: 16px;
-  padding: 16px 20px;
-  background: #fff;
-  border: 1px solid var(--gray-200);
-  border-radius: var(--radius-sm);
   font-size: 15px;
+  font-weight: 500;
   color: var(--gray-400);
   transition: all .4s ease;
   opacity: 0.6;
-  box-shadow: var(--shadow-sm);
 }
-.analysis-step.active {
-  opacity: 1;
-  color: var(--primary);
-  border-color: var(--primary-light);
-  background: var(--primary-light);
-  transform: scale(1.02);
-}
-.analysis-step.done {
-  opacity: 1;
-  color: var(--gray-800);
-  border-color: var(--success-light);
-}
-.step-icon-wrapper {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
+.analysis-step.active { opacity: 1; color: var(--primary); }
+.analysis-step.done { opacity: 1; color: var(--gray-600); }
+.step-icon {
+  width: 24px;
+  height: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 50%;
   background: var(--gray-100);
-  color: var(--gray-500);
+  color: var(--gray-400);
   transition: all .4s ease;
 }
-.analysis-step.active .step-icon-wrapper {
-  background: #fff;
+.analysis-step.active .step-icon {
+  background: var(--primary-light);
   color: var(--primary);
   animation: pulse-ring 1.5s infinite;
 }
-.analysis-step.done .step-icon-wrapper {
-  background: var(--success-light);
-  color: var(--success);
+.analysis-step.done .step-icon {
+  background: #dcfce7;
+  color: #16a34a;
 }
 @keyframes pulse-ring {
-  0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.4); }
-  70% { box-shadow: 0 0 0 6px rgba(37, 99, 235, 0); }
+  0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.3); }
+  70% { box-shadow: 0 0 0 8px rgba(37, 99, 235, 0); }
   100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
 }
 
 /* ── RESULTS SCREEN ── */
 .results-wrapper {
-  max-width: 860px;
+  max-width: 880px;
   margin: 0 auto;
-  padding: 32px 24px 100px;
+  padding: 40px 24px 120px;
 }
-.results-top-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 24px;
+.results-header-block {
+  margin-bottom: 40px;
 }
 .btn-back {
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--gray-200);
-  border-radius: var(--radius-sm);
   padding: 8px 16px;
-  font-size: 14px;
+  border-radius: 20px;
+  font-size: 13px;
   font-weight: 500;
   cursor: pointer;
-  color: var(--gray-700);
+  color: var(--gray-600);
   transition: all .2s;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 6px;
+  margin-bottom: 32px;
   box-shadow: var(--shadow-sm);
 }
-.btn-back:hover { border-color: var(--gray-300); color: var(--gray-900); background: var(--gray-50); }
+.btn-back:hover { color: var(--fg); border-color: var(--gray-300); background: var(--gray-50); }
 
-/* AI Interpretation card */
-.ai-card {
-  background: var(--primary-light);
-  border: 1px solid rgba(37, 99, 235, 0.2);
-  border-radius: var(--radius);
-  padding: 20px 24px;
-  margin-bottom: 20px;
-  display: flex;
-  gap: 16px;
-  align-items: flex-start;
-}
-.ai-card-icon { color: var(--primary); padding-top: 2px; }
-.ai-card-body h4 { font-size: 12px; font-weight: 700; color: var(--primary); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
-.ai-card-body p { font-size: 15px; color: var(--gray-800); line-height: 1.6; }
-.need-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
-.need-tag {
+/* Human-in-the-loop emphasis */
+.hil-banner {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: var(--surface);
+  border: 1px solid var(--gray-200);
+  border-radius: 20px;
   font-size: 13px;
   font-weight: 600;
-  padding: 4px 12px;
-  border-radius: 20px;
-  background: #fff;
-  color: var(--primary);
-  border: 1px solid rgba(37, 99, 235, 0.2);
-  display: flex;
-  align-items: center;
-  gap: 6px;
+  color: var(--gray-700);
+  margin-bottom: 24px;
   box-shadow: var(--shadow-sm);
 }
+.hil-banner i { color: var(--primary); }
 
-/* Urgent banner */
+.ai-card {
+  background: var(--surface);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  border: 1px solid var(--gray-200);
+  border-left: 4px solid var(--primary);
+  margin-bottom: 32px;
+  box-shadow: var(--shadow-sm);
+}
+.ai-card h4 { font-size: 13px; font-weight: 600; color: var(--gray-500); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+.ai-card p { font-size: 18px; font-weight: 400; color: var(--fg); line-height: 1.5; }
+
 .urgent-banner {
   background: var(--urgent-light);
-  border: 1px solid rgba(220, 38, 38, 0.2);
-  border-radius: var(--radius);
+  border: 1px solid #fecdd3;
+  border-left: 4px solid var(--urgent);
   padding: 20px 24px;
-  margin-bottom: 24px;
-  display: flex;
-  gap: 16px;
-  align-items: flex-start;
+  border-radius: var(--radius-md);
+  margin-bottom: 32px;
 }
-.urgent-banner-icon { color: var(--urgent); padding-top: 2px; }
-.urgent-banner h4 { font-size: 15px; font-weight: 700; color: var(--urgent); margin-bottom: 4px; }
-.urgent-banner p { font-size: 14px; color: #991b1b; line-height: 1.5; }
+.urgent-banner h4 { font-size: 15px; font-weight: 600; color: var(--urgent); margin-bottom: 4px; display: flex; align-items: center; gap: 8px;}
+.urgent-banner p { font-size: 14px; color: #9f1239; margin-left: 26px;}
 
-/* Filter bar */
 .filter-bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
-  gap: 16px;
-}
-.results-count { font-size: 15px; color: var(--gray-600); font-weight: 500; }
-.filter-tabs { display: flex; gap: 8px; flex-wrap: wrap; }
-.filter-tab {
-  padding: 8px 16px;
-  border: 1px solid var(--gray-200);
-  border-radius: 24px;
-  background: #fff;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all .2s;
-  color: var(--gray-600);
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-.filter-tab:hover { border-color: var(--gray-300); color: var(--gray-900); }
-.filter-tab.active {
-  background: var(--gray-900);
-  border-color: var(--gray-900);
-  color: #fff;
-}
-.tab-count {
-  background: var(--gray-100);
-  color: var(--gray-600);
-  border-radius: 12px;
-  padding: 2px 6px;
-  font-size: 12px;
-  font-weight: 600;
-  margin-left: 4px;
-}
-.filter-tab.active .tab-count {
-  background: rgba(255,255,255,0.2);
-  color: #fff;
-}
-
-/* Sort control */
-.sort-control {
-  display: flex;
-  align-items: center;
-  gap: 8px;
   margin-bottom: 24px;
+  border-bottom: 1px solid var(--gray-200);
+  padding-bottom: 16px;
 }
-.sort-control label { font-size: 14px; color: var(--gray-500); font-weight: 500; }
-.sort-control select {
-  padding: 6px 32px 6px 12px;
-  border: 1px solid var(--gray-200);
-  border-radius: var(--radius-sm);
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--gray-800);
-  background: #fff url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="%23475569" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>') no-repeat right 8px center;
-  cursor: pointer;
-  -webkit-appearance: none;
-}
-.sort-control select:focus {
-  outline: none;
-  border-color: var(--primary);
-  box-shadow: 0 0 0 3px var(--primary-light);
-}
-
-/* Program cards */
-.programs-grid { display: flex; flex-direction: column; gap: 16px; }
-.program-card {
-  background: #fff;
-  border: 1px solid var(--gray-200);
-  border-radius: var(--radius);
-  padding: 24px;
-  box-shadow: var(--shadow-sm);
-  transition: all .2s ease;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-}
-.program-card:hover {
-  box-shadow: var(--shadow-md);
-  border-color: var(--gray-300);
-  transform: translateY(-2px);
-}
-.program-card.urgent-card::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 4px;
-  background: var(--urgent);
-}
-.card-header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 16px;
-  margin-bottom: 12px;
-}
-.card-header-left { display: flex; align-items: flex-start; gap: 16px; flex: 1; min-width: 0; }
-.cat-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-.card-title-block { min-width: 0; padding-top: 2px; }
-.card-title {
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--gray-900);
-  line-height: 1.3;
-  margin-bottom: 4px;
-}
-.card-org { font-size: 14px; color: var(--gray-500); }
-.card-badges { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; flex-shrink: 0; }
-.badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12px;
-  font-weight: 600;
-  padding: 4px 10px;
-  border-radius: 20px;
-  white-space: nowrap;
-}
-.badge-verified-high { background: var(--success-light); color: var(--success); border: 1px solid rgba(5, 150, 105, 0.2); }
-.badge-verified-medium { background: var(--warning-light); color: var(--warning); border: 1px solid rgba(217, 119, 6, 0.2); }
-.badge-verified-low { background: #fff7ed; color: #ea580c; border: 1px solid rgba(234, 88, 12, 0.2); }
-.badge-verified-unknown { background: var(--gray-100); color: var(--gray-500); border: 1px solid var(--gray-200); }
-.badge-response { background: var(--primary-light); color: var(--primary); border: 1px solid rgba(37, 99, 235, 0.2); }
-.badge-response.urgent-response { background: var(--urgent-light); color: var(--urgent); border: 1px solid rgba(220, 38, 38, 0.2); }
-
-.card-summary {
-  font-size: 15px;
-  color: var(--gray-700);
-  margin-bottom: 16px;
-  line-height: 1.6;
-}
-.card-meta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-  font-size: 14px;
-  color: var(--gray-600);
-}
-.card-meta-item { display: flex; align-items: center; gap: 6px; }
-.card-meta-item svg { color: var(--gray-400); width: 16px; height: 16px; }
-
-.card-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 20px;
-  padding-top: 16px;
-  border-top: 1px solid var(--gray-100);
-}
-.btn-details {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--primary);
+.filter-tabs { display: flex; gap: 24px; overflow-x: auto; padding-bottom: 4px; }
+.filter-tab {
   background: none;
   border: none;
-  cursor: pointer;
   padding: 0;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  transition: gap .2s;
-}
-.program-card:hover .btn-details { gap: 10px; }
-.card-docs {
-  font-size: 13px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
   color: var(--gray-500);
-  display: flex;
-  align-items: center;
-  gap: 6px;
+  transition: color .2s;
+  position: relative;
+  white-space: nowrap;
 }
-.card-docs svg { width: 14px; height: 14px; }
-
-/* No results */
-.no-results {
-  text-align: center;
-  padding: 80px 20px;
-  color: var(--gray-500);
-  background: #fff;
-  border-radius: var(--radius);
-  border: 1px dashed var(--gray-300);
+.filter-tab:hover { color: var(--fg); }
+.filter-tab.active { color: var(--primary); font-weight: 600; }
+.filter-tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: -21px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--primary);
+  border-radius: 2px 2px 0 0;
 }
-.no-results svg { width: 48px; height: 48px; color: var(--gray-300); margin-bottom: 16px; }
-.no-results h3 { font-size: 18px; margin-bottom: 8px; color: var(--gray-700); }
-.no-results p { font-size: 15px; }
+.tab-count { font-size: 12px; color: var(--gray-400); margin-left: 4px; background: var(--gray-100); padding: 2px 6px; border-radius: 12px;}
+.filter-tab.active .tab-count { background: var(--primary-light); color: var(--primary); }
+.results-count { font-size: 13px; color: var(--gray-500); font-weight: 500; }
 
-/* Responsible AI note */
-.rai-note {
-  background: var(--gray-100);
-  border-radius: var(--radius);
-  padding: 24px;
-  margin-top: 40px;
+/* Program cards - Comforting Card Style */
+.programs-grid { display: flex; flex-direction: column; gap: 16px; }
+.program-card {
+  background: var(--surface);
   border: 1px solid var(--gray-200);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  cursor: pointer;
+  transition: all .2s ease;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 24px;
+  align-items: center;
+  box-shadow: var(--shadow-sm);
 }
-.rai-note h4 { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 700; color: var(--gray-800); margin-bottom: 8px; }
-.rai-note p { font-size: 13px; color: var(--gray-600); line-height: 1.6; }
+.program-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--gray-300);
+}
+.program-card.urgent-card { border-left: 4px solid var(--urgent); }
 
-/* ── MODAL ── */
+.card-main { min-width: 0; }
+.card-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--fg);
+  margin-bottom: 6px;
+}
+.card-org { font-size: 14px; color: var(--gray-500); display: flex; align-items: center; gap: 6px; }
+
+.card-meta-col { display: flex; flex-direction: column; gap: 10px; }
+.meta-text { font-size: 14px; color: var(--gray-600); display: flex; align-items: center; gap: 8px;}
+.meta-text i { color: var(--gray-400); }
+
+.card-status-col { display: flex; flex-direction: column; gap: 10px; align-items: flex-end; }
+.status-item { font-size: 13px; display: flex; align-items: center; gap: 6px; padding: 4px 10px; border-radius: 12px; background: var(--gray-50); border: 1px solid var(--gray-100); }
+.status-verified { color: #16a34a; background: #f0fdf4; border-color: #bbf7d0; font-weight: 500;}
+.status-verified i { color: #16a34a; }
+.status-response { font-weight: 500; color: var(--primary); background: var(--primary-light); border-color: #bfdbfe; }
+.urgent-card .status-response { color: var(--urgent); background: var(--urgent-light); border-color: #fecdd3; }
+
+/* Transparency Note */
+.transparency-panel {
+  margin-top: 64px;
+  background: var(--surface);
+  padding: 32px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--gray-200);
+  box-shadow: var(--shadow-sm);
+}
+.transparency-panel h4 { font-size: 14px; font-weight: 600; color: var(--fg); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;}
+.transparency-panel h4 i { color: #16a34a; }
+.transparency-panel p { font-size: 14px; color: var(--gray-600); line-height: 1.6; max-width: 700px;}
+
+/* ── MODALS ── */
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(15, 23, 42, 0.6);
+  background: rgba(15, 23, 42, 0.4);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   z-index: 300;
   display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  padding: 0;
+  align-items: center;
+  justify-content: flex-end;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease;
 }
 .modal-overlay.open { opacity: 1; pointer-events: auto; }
-@media (min-width: 640px) {
-  .modal-overlay { align-items: center; padding: 24px; }
-}
 .modal-box {
-  background: #fff;
-  border-radius: 24px 24px 0 0;
+  background: var(--surface);
   width: 100%;
   max-width: 640px;
-  max-height: 90vh;
+  height: 100vh;
   overflow-y: auto;
-  box-shadow: var(--shadow-lg);
-  position: relative;
-  transform: translateY(100%);
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: -10px 0 40px rgba(0,0,0,0.1);
+  transform: translateX(100%);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 48px;
+  border-left: 1px solid var(--gray-200);
 }
-.modal-overlay.open .modal-box { transform: translateY(0); }
-@media (min-width: 640px) {
-  .modal-box { border-radius: 24px; }
-}
+.modal-overlay.open .modal-box { transform: translateX(0); }
+
 .modal-header {
-  padding: 24px 24px 20px;
-  position: sticky;
-  top: 0;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border-bottom: 1px solid var(--gray-100);
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 16px;
-  z-index: 10;
+  margin-bottom: 40px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--gray-200);
 }
-.modal-header-left { display: flex; gap: 16px; align-items: flex-start; }
-.modal-header .cat-icon { width: 56px; height: 56px; }
-.modal-header .cat-icon svg { width: 28px; height: 28px; }
-.modal-title { font-size: 22px; font-weight: 800; line-height: 1.2; color: var(--gray-900); margin-bottom: 4px; }
-.modal-org { font-size: 15px; color: var(--gray-500); }
+.modal-title { font-size: 28px; font-weight: 600; color: var(--fg); margin-bottom: 8px; }
+.modal-org { font-size: 15px; color: var(--gray-500); display: flex; align-items: center; gap: 6px;}
 
-.modal-actions { display: flex; gap: 8px; }
+.modal-actions { display: flex; gap: 12px; }
 .btn-icon {
   background: var(--gray-50);
   border: 1px solid var(--gray-200);
-  border-radius: 50%;
+  cursor: pointer;
+  color: var(--gray-600);
+  transition: all .2s;
   width: 40px;
   height: 40px;
-  cursor: pointer;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--gray-600);
-  transition: all .2s;
 }
-.btn-icon:hover { background: var(--gray-100); color: var(--gray-900); border-color: var(--gray-300); }
+.btn-icon:hover { color: var(--fg); background: var(--gray-100); border-color: var(--gray-300); }
 
-.modal-body { padding: 24px; }
-.modal-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 28px; }
-.modal-section { margin-bottom: 28px; }
-.modal-section:last-child { margin-bottom: 0; }
+.modal-section { margin-bottom: 32px; }
 .modal-section h4 {
-  font-size: 13px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
-  color: var(--gray-400);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--fg);
   margin-bottom: 12px;
   display: flex;
   align-items: center;
   gap: 8px;
 }
-.modal-section p, .modal-section div {
+.modal-section h4 i { color: var(--primary); }
+.modal-section p, .modal-section li {
   font-size: 15px;
-  color: var(--gray-800);
+  color: var(--gray-600);
   line-height: 1.6;
 }
-.modal-section ul {
-  font-size: 15px;
-  color: var(--gray-800);
-  padding-left: 20px;
-  line-height: 1.6;
-}
-.modal-section ul li { margin-bottom: 6px; }
+.modal-section ul { padding-left: 20px; }
+
 .contact-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-.contact-item {
+  gap: 20px;
   background: var(--gray-50);
-  border: 1px solid var(--gray-100);
-  border-radius: var(--radius-sm);
-  padding: 16px;
+  padding: 24px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--gray-200);
 }
-.contact-item .label { font-size: 12px; font-weight: 700; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;}
-.contact-item .value { font-size: 15px; color: var(--gray-900); font-weight: 500; }
-.contact-item .value a { color: var(--primary); text-decoration: none; }
-.contact-item .value a:hover { text-decoration: underline; }
+.contact-item .label { font-size: 12px; font-weight: 600; color: var(--gray-500); margin-bottom: 4px; }
+.contact-item .value { font-size: 15px; font-weight: 500; color: var(--fg); }
 
-.modal-cta {
-  margin-top: 32px;
-  padding-top: 24px;
-  border-top: 1px solid var(--gray-100);
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
 .btn-call {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  padding: 16px;
-  background: var(--success);
+  padding: 16px 32px;
+  background: var(--primary);
   color: #fff;
-  border: none;
-  border-radius: var(--radius-sm);
-  font-size: 16px;
-  font-weight: 700;
-  cursor: pointer;
   text-decoration: none;
-  transition: all .2s;
-  box-shadow: var(--shadow-sm);
+  font-size: 15px;
+  font-weight: 500;
+  margin-top: 24px;
+  border-radius: var(--radius-md);
+  transition: background .2s, transform .2s;
+  width: 100%;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
 }
-.btn-call:hover { background: #047857; transform: translateY(-1px); box-shadow: var(--shadow); }
-.modal-disclaimer {
-  font-size: 13px;
-  color: var(--gray-500);
-  text-align: center;
-  line-height: 1.5;
-}
+.btn-call:hover { background: var(--primary-hover); transform: translateY(-2px); }
 
-/* FAB - Quick Exit / 911 */
+/* FAB */
 .fab-container {
   position: fixed;
-  bottom: 24px;
-  right: 24px;
+  bottom: 32px;
+  right: 32px;
   z-index: 100;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
   align-items: flex-end;
 }
 .fab-btn {
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background: #fff;
+  background: var(--surface);
   border: 1px solid var(--gray-200);
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow-md);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -890,38 +668,47 @@ textarea#situation::placeholder { color: var(--gray-400); }
   color: var(--gray-600);
   transition: all .2s;
 }
-.fab-btn:hover {
-  background: var(--gray-50);
-  color: var(--gray-900);
-  transform: scale(1.05);
+.fab-btn:hover { color: var(--fg); box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+.fab-btn.urgent { color: var(--urgent); border-color: #fecdd3; background: var(--urgent-light); }
+
+/* Architecture Modal Specifics */
+.arch-flow {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 24px;
 }
-.fab-emergency {
-  background: var(--urgent);
-  color: #fff;
-  border: none;
-  width: auto;
-  padding: 0 20px;
-  height: 56px;
-  border-radius: 28px;
-  font-weight: 700;
-  font-size: 15px;
-  gap: 8px;
+.arch-step {
+  padding: 20px;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  gap: 16px;
 }
-.fab-emergency:hover {
-  background: #b91c1c;
-  color: #fff;
+.arch-step-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--primary-light);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.arch-step h5 { font-size: 14px; font-weight: 600; margin-bottom: 4px; color: var(--fg); }
+.arch-step p { font-size: 14px; color: var(--gray-600); margin: 0; }
+.arch-arrow {
+  text-align: center;
+  color: var(--gray-400);
 }
 
-/* Print specific styles */
 @media print {
-  body { background: #fff; }
-  .nav, .fab-container, .btn-close, .btn-icon, .btn-back, .filter-bar, .sort-control, .quick-filters, .urgency-section, .hero, .btn-primary { display: none !important; }
+  .nav, .fab-container, .btn-icon, .btn-back, .filter-bar, .quick-filters, .urgency-section, .hero, .btn-primary { display: none !important; }
   .modal-overlay { position: static; background: none; }
-  .modal-box { box-shadow: none; max-width: 100%; border-radius: 0; transform: none; }
-  .modal-header { position: static; padding: 0 0 20px 0; border-bottom: 2px solid #000; }
-  .modal-body { padding: 20px 0; }
-  .contact-item { border: 1px solid #000; break-inside: avoid; }
-  .badge { border: 1px solid #000; color: #000 !important; background: transparent !important; }
+  .modal-box { box-shadow: none; max-width: 100%; border: none; transform: none; padding: 0; }
 }
 
 </style>
@@ -931,27 +718,27 @@ textarea#situation::placeholder { color: var(--gray-400); }
 <!-- NAV -->
 <nav class="nav">
   <a class="logo" href="#" onclick="return false">
-    <i data-lucide="shield"></i>
+    <i data-lucide="shield" style="width:24px;height:24px; fill: var(--primary-light)"></i>
     CrisisAid
   </a>
   <div class="nav-right">
-    <span class="badge-ai"><i data-lucide="sparkles" style="width:14px; height:14px"></i> AI-Powered</span>
-    <button class="btn-settings" id="btn-settings" title="Settings" onclick="toggleSettings()">
-      <i data-lucide="settings"></i>
+    <a class="nav-link" onclick="openArchModal()"><i data-lucide="layers" style="width:16px;height:16px"></i> Architecture</a>
+    <button class="btn-settings" id="btn-settings" onclick="toggleSettings()">
+      <i data-lucide="settings" style="width:20px;height:20px"></i>
     </button>
   </div>
 </nav>
 
 <!-- Settings Panel -->
 <div class="settings-panel" id="settings-panel">
-  <h3><i data-lucide="settings" style="width:20px; height:20px"></i> Settings</h3>
-  <label>Claude API Key (optional)</label>
+  <h3><i data-lucide="settings" style="width:18px;height:18px; color:var(--primary)"></i> Settings</h3>
+  <label>Claude API Key</label>
   <input type="password" id="api-key-input" placeholder="sk-ant-..." />
-  <small>Add your Anthropic API key to enable richer AI-powered need detection. Without a key, smart keyword matching is used instead.</small>
-  <button class="btn-save-key" onclick="saveApiKey()">Save Key</button>
+  <small>Enable LLM classification. Without a key, fallback regex matching is used.</small>
+  <button class="btn-save-key" onclick="saveApiKey()">Save Configuration</button>
   <div class="key-status inactive" id="key-status">
-    <i data-lucide="info" style="width:16px; height:16px"></i>
-    <span>No API key set — using keyword matching</span>
+    <i data-lucide="info" style="width:16px;height:16px"></i>
+    <span>Regex matching active</span>
   </div>
 </div>
 
@@ -959,65 +746,66 @@ textarea#situation::placeholder { color: var(--gray-400); }
 <div class="screen active" id="screen-intake">
   <div class="intake-wrapper">
     <div class="hero">
-      <h1>Find help <span class="highlight">right now.</span></h1>
-      <p>Tell us what's going on. We match you with real, currently active aid programs — food, housing, utilities, and more.</p>
+      <h1>Find active aid. Fast.</h1>
+      <p>Describe your situation. Our AI curates programs, but humans make the decisions.</p>
     </div>
 
     <div class="intake-card">
-      <div class="input-group">
-        <label for="situation">
-          What's your situation?
-          <span class="label-hint">Plain language is fine</span>
-        </label>
-        <textarea
-          id="situation"
-          placeholder="Example: I lost my job last week and we're almost out of groceries. I have two kids and rent is due in 10 days and I don't know how we'll pay it..."
-        ></textarea>
-      </div>
-
-      <div class="quick-filters">
-        <div class="filter-group">
-          <label><i data-lucide="map-pin" style="width:16px;height:16px"></i> ZIP code</label>
-          <input type="text" id="zipcode" placeholder="e.g. 94110" maxlength="5" pattern="\d{5}">
+      <div class="intake-form">
+        <div class="input-group">
+          <label for="situation">Situation Description</label>
+          <textarea
+            id="situation"
+            placeholder="I lost my job last week and rent is due. We need groceries..."
+          ></textarea>
         </div>
-        <div class="filter-group">
-          <label><i data-lucide="users" style="width:16px;height:16px"></i> Household size</label>
-          <select id="household">
-            <option value="">Select...</option>
-            <option value="1">Just me (1 person)</option>
-            <option value="2">2 people</option>
-            <option value="3">3 people</option>
-            <option value="4">4+ people</option>
-          </select>
+
+        <div class="quick-filters">
+          <div class="filter-group">
+            <label>ZIP Code</label>
+            <input type="text" id="zipcode" placeholder="94110" maxlength="5" pattern="\d{5}">
+          </div>
+          <div class="filter-group">
+            <label>Household</label>
+            <select id="household">
+              <option value="">Select size</option>
+              <option value="1">1 Person</option>
+              <option value="2">2 People</option>
+              <option value="3">3 People</option>
+              <option value="4">4+ People</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="urgency-section">
+          <label>Urgency Level</label>
+          <div class="urgency-options">
+            <button class="urgency-btn" data-value="today">
+              <i data-lucide="alert-circle" style="width:20px;height:20px"></i>
+              Immediate (Today)
+            </button>
+            <button class="urgency-btn" data-value="week">
+              <i data-lucide="clock" style="width:20px;height:20px"></i>
+              Within a Week
+            </button>
+            <button class="urgency-btn selected" data-value="general">
+              <i data-lucide="calendar" style="width:20px;height:20px"></i>
+              General Planning
+            </button>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <div class="disclaimer">
+            <i data-lucide="lock" style="width:16px;height:16px"></i>
+            Privacy focused. Data is not stored.
+          </div>
+          <button class="btn-primary" id="find-btn">
+            Analyze Request
+            <i data-lucide="arrow-right" style="width:18px;height:18px"></i>
+          </button>
         </div>
       </div>
-
-      <div class="urgency-section">
-        <label><i data-lucide="clock" style="width:16px;height:16px"></i> How urgent is your need?</label>
-        <div class="urgency-options">
-          <button class="urgency-btn" data-value="today">
-            <i data-lucide="alert-circle" style="color:var(--urgent)"></i>
-            I need help today
-          </button>
-          <button class="urgency-btn" data-value="week">
-            <i data-lucide="calendar-clock" style="color:var(--warning)"></i>
-            This week
-          </button>
-          <button class="urgency-btn selected" data-value="general">
-            <i data-lucide="calendar-check" style="color:var(--success)"></i>
-            Planning ahead
-          </button>
-        </div>
-      </div>
-
-      <button class="btn-primary" id="find-btn">
-        Find Aid Programs
-        <i data-lucide="arrow-right" style="width:20px;height:20px"></i>
-      </button>
-      <p class="disclaimer">
-        <i data-lucide="lock" style="width:14px;height:14px"></i>
-        Nothing you enter is stored or shared.
-      </p>
     </div>
   </div>
 </div>
@@ -1026,8 +814,8 @@ textarea#situation::placeholder { color: var(--gray-400); }
 <div class="screen" id="screen-analyzing">
   <div class="analyzing-wrapper">
     <div class="analyzing-header">
-      <h2><i data-lucide="loader-2" class="spinner-icon"></i> Finding programs...</h2>
-      <p>Matching your situation to verified aid programs</p>
+      <i data-lucide="cpu" style="width:28px;height:28px; color:var(--primary)"></i>
+      <h2>Analyzing Request</h2>
     </div>
     <div class="analysis-steps" id="analysis-steps"></div>
   </div>
@@ -1036,67 +824,114 @@ textarea#situation::placeholder { color: var(--gray-400); }
 <!-- ══════════════════════════════════════ SCREEN 3: RESULTS -->
 <div class="screen" id="screen-results">
   <div class="results-wrapper">
-    <div class="results-top-bar">
-      <button class="btn-back" id="btn-back">
-        <i data-lucide="arrow-left" style="width:16px;height:16px"></i> Search again
-      </button>
-    </div>
+    
+    <button class="btn-back" id="btn-back">
+      <i data-lucide="arrow-left" style="width:16px;height:16px"></i> Return to Intake
+    </button>
 
-    <div class="ai-card" id="ai-card">
-      <div class="ai-card-icon"><i data-lucide="bot"></i></div>
-      <div class="ai-card-body">
-        <h4>AI Analysis</h4>
-        <p id="ai-summary-text"></p>
-        <div class="need-tags" id="need-tags"></div>
+    <div class="results-header-block">
+      <div class="hil-banner">
+        <i data-lucide="git-merge" style="width:16px;height:16px"></i>
+        AI Curates. Humans Decide.
       </div>
-    </div>
+      
+      <div class="ai-card" id="ai-card">
+        <h4>System Analysis</h4>
+        <p id="ai-summary-text"></p>
+      </div>
 
-    <div class="urgent-banner" id="urgent-banner" style="display:none">
-      <div class="urgent-banner-icon"><i data-lucide="alert-triangle"></i></div>
-      <div>
-        <h4>Immediate help prioritized</h4>
+      <div class="urgent-banner" id="urgent-banner" style="display:none">
+        <h4><i data-lucide="alert-triangle" style="width:18px"></i> Urgent Request Detected</h4>
         <p id="urgent-banner-text"></p>
       </div>
     </div>
 
     <div class="filter-bar">
-      <span class="results-count" id="results-count"></span>
       <div class="filter-tabs" id="filter-tabs"></div>
-    </div>
-
-    <div class="sort-control">
-      <label>Sort by:</label>
-      <select id="sort-select" onchange="renderResults()">
-        <option value="relevance">Most relevant</option>
-        <option value="urgency">Fastest response</option>
-        <option value="verified">Most recently verified</option>
-      </select>
+      <span class="results-count" id="results-count"></span>
     </div>
 
     <div class="programs-grid" id="programs-grid"></div>
 
-    <div class="rai-note">
-      <h4><i data-lucide="info" style="width:16px;height:16px"></i> About these results</h4>
+    <div class="transparency-panel">
+      <h4><i data-lucide="shield-check" style="width:18px"></i> Transparency & Trust Guardrails</h4>
       <p>
-        Programs are matched to your described situation and cross-referenced against recent verification data.
-        Verification badges show how recently each listing was confirmed active — programs can run out of funding or change hours without notice.
-        <strong>Always call or check the website before visiting.</strong> CrisisAid helps you find the door; the people at each organization will open it.
+        To prevent AI hallucination and misinformation, this system uses a deterministic approach. The LLM strictly classifies the unstructured input (intent extraction). The output is then mapped exclusively against a human-verified, static database of programs. Verification dates indicate when human auditors last confirmed the program's active status.
       </p>
     </div>
   </div>
 </div>
 
-<!-- ══════════════════════════════════════ MODAL -->
-<div class="modal-overlay" id="program-modal" onclick="closeModal(event)">
+<!-- ══════════════════════════════════════ PROGRAM MODAL -->
+<div class="modal-overlay" id="program-modal" onclick="closeModal(event, 'program-modal')">
   <div class="modal-box" id="modal-box">
     <!-- Filled by JS -->
   </div>
 </div>
 
+<!-- ══════════════════════════════════════ ARCHITECTURE MODAL -->
+<div class="modal-overlay" id="arch-modal" onclick="closeModal(event, 'arch-modal')">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title">System Architecture</div>
+        <div class="modal-org"><i data-lucide="award" style="width:16px; color:var(--primary)"></i> USAII Challenge Alignment</div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-icon" onclick="closeModal(null, 'arch-modal')">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+    </div>
+    
+    <div class="modal-section" style="margin-top: 32px">
+      <h4><i data-lucide="users"></i> Human-in-the-Loop</h4>
+      <p>The AI does <strong>not</strong> make eligibility or approval decisions. It acts as an intelligent router, mapping unstructured crisis narratives to verified program categories. A human case worker at the organization makes the final decision.</p>
+    </div>
+
+    <div class="modal-section">
+      <h4><i data-lucide="git-branch"></i> Data Flow Pipeline</h4>
+      <div class="arch-flow">
+        <div class="arch-step">
+          <div class="arch-step-icon"><i data-lucide="message-square"></i></div>
+          <div>
+            <h5>1. Input</h5>
+            <p>User provides unstructured plain-language text describing their situation.</p>
+          </div>
+        </div>
+        <div class="arch-arrow"><i data-lucide="arrow-down" style="width:20px;height:20px"></i></div>
+        <div class="arch-step">
+          <div class="arch-step-icon"><i data-lucide="cpu"></i></div>
+          <div>
+            <h5>2. LLM Classification</h5>
+            <p>Anthropic Claude processes the text, outputting ONLY structured JSON identifying core needs and urgency.</p>
+          </div>
+        </div>
+        <div class="arch-arrow"><i data-lucide="arrow-down" style="width:20px;height:20px"></i></div>
+        <div class="arch-step">
+          <div class="arch-step-icon"><i data-lucide="database"></i></div>
+          <div>
+            <h5>3. Deterministic Matching</h5>
+            <p>The JSON is matched against a human-audited, verified local database to eliminate hallucination risks.</p>
+          </div>
+        </div>
+        <div class="arch-arrow"><i data-lucide="arrow-down" style="width:20px;height:20px"></i></div>
+        <div class="arch-step">
+          <div class="arch-step-icon"><i data-lucide="check-circle"></i></div>
+          <div>
+            <h5>4. Output</h5>
+            <p>User receives ranked, verified contact points and takes agency to call the programs.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ══════════════════════════════════════ FAB -->
 <div class="fab-container">
-  <button class="fab-btn fab-emergency" onclick="window.location.href='tel:911'">
-    <i data-lucide="phone" style="width:20px;height:20px"></i> 911
+  <button class="fab-btn urgent" title="Emergency 911" onclick="window.location.href='tel:911'">
+    <i data-lucide="phone-call" style="width:24px;height:24px"></i>
   </button>
   <button class="fab-btn" title="Quick Exit" onclick="window.location.href='https://weather.com'">
     <i data-lucide="log-out" style="width:24px;height:24px"></i>
@@ -1104,344 +939,92 @@ textarea#situation::placeholder { color: var(--gray-400); }
 </div>
 
 <script>
-// Initialize Icons immediately
 lucide.createIcons();
 
 // ═══════════════════════════════════ DATA ═══════════════════════════════════
 
 const CATEGORIES = {
-  food:      { label: 'Food',       icon: 'shopping-bag', bg: '#ecfdf5', color: '#059669' },
-  housing:   { label: 'Housing',    icon: 'home',         bg: '#eff6ff', color: '#2563eb' },
-  utilities: { label: 'Utilities',  icon: 'zap',          bg: '#fffbeb', color: '#d97706' },
-  medical:   { label: 'Medical',    icon: 'heart-pulse',  bg: '#fef2f2', color: '#dc2626' },
-  cash:      { label: 'Cash Aid',   icon: 'banknote',     bg: '#f5f3ff', color: '#7c3aed' },
-  childcare: { label: 'Childcare',  icon: 'baby',         bg: '#fdf2f8', color: '#db2777' },
+  food:      { label: 'Food', icon: 'shopping-bag' },
+  housing:   { label: 'Housing', icon: 'home' },
+  utilities: { label: 'Utilities', icon: 'zap' },
+  medical:   { label: 'Medical', icon: 'heart-pulse' },
+  cash:      { label: 'Cash Aid', icon: 'banknote' },
+  childcare: { label: 'Childcare', icon: 'baby' },
 };
-
-// urgency: "immediate" | "same-day" | "within-week" | "general"
-// confidence: "high" | "medium" | "low" | "unknown"
-// verified_days: number of days since last verified
 
 const PROGRAMS = [
   {
-    id: 1,
-    name: 'Emergency Food Pantry',
-    org: 'United Way Community Hub',
-    category: 'food',
-    urgency: 'immediate',
-    response_time: 'Same day',
-    summary: 'Walk-in food supply for any household in crisis — no appointment needed.',
-    provides: '3-day emergency food supply per visit (available once per month per household). Includes shelf-stable items, produce when available, and personal care products.',
-    eligibility: 'Open to anyone in the service area with no income verification required on your first visit. Subsequent visits require a photo ID.',
-    how_to_apply: 'Simply walk in during open hours. No appointment or referral needed. For your first visit, just show up — staff will guide you through intake.',
-    phone: '(415) 555-0182',
-    hours: 'Mon–Fri 9am–4pm · Sat 10am–2pm',
-    address: '1240 Mission St, San Francisco, CA',
-    website: '#',
-    verified_days: 2,
-    confidence: 'high',
-    required_docs: ['Photo ID (repeat visits only)'],
-    tags: ['food', 'emergency', 'no-appointment', 'walk-in'],
+    id: 1, name: 'Emergency Food Pantry', org: 'United Way Community Hub', category: 'food',
+    urgency: 'immediate', response_time: 'Same day',
+    summary: 'Walk-in food supply for any household in crisis.',
+    provides: '3-day emergency food supply per visit. Includes shelf-stable items and produce.',
+    eligibility: 'Open to anyone in service area. No income verification on first visit.',
+    how_to_apply: 'Walk in during open hours. No appointment needed.',
+    phone: '(415) 555-0182', hours: 'Mon–Fri 9am–4pm', address: '1240 Mission St, SF',
+    verified_days: 2, confidence: 'high', required_docs: ['Photo ID (repeat visits only)']
   },
   {
-    id: 2,
-    name: 'SNAP Emergency Benefits',
-    org: 'Dept. of Social Services',
-    category: 'food',
-    urgency: 'within-week',
-    response_time: '3–7 days',
-    summary: 'Monthly food assistance benefits — expedited processing available if you qualify.',
-    provides: '$250–$1,000+/month in food benefits depending on household size and income. Expedited processing in 7 days or less if household has less than $150/month income.',
-    eligibility: 'Households with gross income at or below 130% of the federal poverty level. U.S. citizens and many legal non-citizens qualify.',
-    how_to_apply: 'Apply online at benefits.gov, call the hotline for a phone interview, or visit a county office. Bring proof of income, photo ID, and proof of address.',
-    phone: '(800) 555-0322',
-    hours: 'Mon–Fri 8am–5pm · Online applications 24/7',
-    address: 'County Benefits Office, 450 Golden Gate Ave',
-    website: 'https://www.benefits.gov',
-    verified_days: 1,
-    confidence: 'high',
-    required_docs: ['Photo ID', 'Proof of income (pay stubs, termination letter)', 'Proof of address'],
-    tags: ['food', 'government', 'monthly-benefit', 'expedited'],
+    id: 2, name: 'SNAP Emergency Benefits', org: 'Dept. of Social Services', category: 'food',
+    urgency: 'within-week', response_time: '3–7 days',
+    summary: 'Monthly food assistance benefits — expedited processing available.',
+    provides: '$250–$1,000+/month in food benefits. Expedited in 7 days for extreme low income.',
+    eligibility: 'Gross income <= 130% FPL. U.S. citizens and eligible non-citizens.',
+    how_to_apply: 'Apply online at benefits.gov or call hotline.',
+    phone: '(800) 555-0322', hours: 'Mon–Fri 8am–5pm', address: '450 Golden Gate Ave',
+    verified_days: 1, confidence: 'high', required_docs: ['Photo ID', 'Proof of income', 'Address proof']
   },
   {
-    id: 3,
-    name: 'WIC Nutrition Program',
-    org: 'SF Dept. of Public Health',
-    category: 'food',
-    urgency: 'within-week',
-    response_time: '3–5 days',
-    summary: 'Free healthy food, formula, and nutrition support for women, infants, and young children.',
-    provides: 'Monthly food package including milk, eggs, fruit, vegetables, cereal, and baby formula. Also includes breastfeeding support and nutrition counseling.',
-    eligibility: 'Pregnant women, new mothers (up to 6 months postpartum or 1 year if breastfeeding), infants and children up to age 5. Income at or below 185% federal poverty level.',
-    how_to_apply: 'Call to schedule an appointment. Bring proof of identity, address, income, and pregnancy/birth records. Can often be seen within a week.',
-    phone: '(415) 555-0275',
-    hours: 'Mon–Fri 8:30am–4:30pm',
-    address: '101 Grove St, San Francisco, CA',
-    website: '#',
-    verified_days: 5,
-    confidence: 'high',
-    required_docs: ['Photo ID', 'Proof of address', 'Proof of income', "Child's birth certificate (if applying for child)"],
-    tags: ['food', 'children', 'pregnancy', 'women', 'nutrition'],
+    id: 4, name: 'Emergency Rental Assistance', org: 'SF Housing Authority', category: 'housing',
+    urgency: 'within-week', response_time: '5–10 days',
+    summary: 'Up to 3 months of back rent paid directly to landlord.',
+    provides: 'Up to $7,500 in rental assistance per household. Paid to landlord.',
+    eligibility: 'Renters experiencing financial hardship <= 80% AMI.',
+    how_to_apply: 'Apply online. Landlord cooperation required.',
+    phone: '(415) 555-0390', hours: 'Mon–Fri 9am–5pm', address: '1815 Egbert Ave, SF',
+    verified_days: 8, confidence: 'medium', required_docs: ['ID', 'Lease', 'Income proof', 'Eviction notice']
   },
   {
-    id: 4,
-    name: 'Emergency Rental Assistance',
-    org: 'SF Housing Authority',
-    category: 'housing',
-    urgency: 'within-week',
-    response_time: '5–10 days',
-    summary: 'Up to 3 months of back rent paid directly to your landlord to prevent eviction.',
-    provides: 'Up to $7,500 in rental assistance per household per year. Funds paid directly to landlord. Also covers utility arrears in some cases.',
-    eligibility: 'Renters experiencing financial hardship due to job loss, reduced income, medical emergency, or other crisis. Must be at or below 80% area median income. Must have a lease.',
-    how_to_apply: 'Apply online or at the Housing Authority office. Landlord cooperation required. Processing takes 5–10 business days after complete application.',
-    phone: '(415) 555-0390',
-    hours: 'Mon–Fri 9am–5pm',
-    address: '1815 Egbert Ave, San Francisco, CA',
-    website: '#',
-    verified_days: 8,
-    confidence: 'medium',
-    required_docs: ['Photo ID', 'Lease agreement', 'Proof of income', 'Landlord contact info', 'Eviction notice (if applicable)'],
-    tags: ['housing', 'rent', 'eviction-prevention', 'landlord'],
+    id: 5, name: 'Low-Barrier Navigation Center', org: 'SF Homeless Services', category: 'housing',
+    urgency: 'immediate', response_time: 'Tonight',
+    summary: 'Immediate overnight shelter — no sobriety requirement.',
+    provides: 'Safe overnight shelter, meals, case management.',
+    eligibility: 'Adults experiencing homelessness. Low barrier.',
+    how_to_apply: 'Call 311 to request outreach placement.',
+    phone: '(415) 555-0412', hours: 'Intake: 4pm–8pm', address: '1950 Mission St, SF',
+    verified_days: 4, confidence: 'high', required_docs: ['None']
   },
   {
-    id: 5,
-    name: 'Emergency Shelter — Low-Barrier',
-    org: 'Navigation Center SF',
-    category: 'housing',
-    urgency: 'immediate',
-    response_time: 'Tonight',
-    summary: 'Immediate overnight shelter for individuals and couples — no sobriety requirement.',
-    provides: 'Safe overnight shelter with beds, storage, meals, showers, and case management. Couples and people with pets accepted. Staff on-site 24/7.',
-    eligibility: 'Adults experiencing homelessness. Low barrier — no sobriety requirement, no curfew. Must be referred by 311 or an outreach team.',
-    how_to_apply: 'Call 311 (SF residents) to request an outreach team or shelter placement. You can also self-refer by calling the shelter directly.',
-    phone: '311 (or direct: (415) 555-0412)',
-    hours: 'Intake: 4pm–8pm · Open 24/7',
-    address: '1950 Mission St, San Francisco, CA',
-    website: '#',
-    verified_days: 4,
-    confidence: 'high',
-    required_docs: ['No ID required'],
-    tags: ['housing', 'shelter', 'homeless', 'immediate', 'no-barrier'],
+    id: 8, name: 'Utility Shutoff Prevention', org: 'Human Services Agency', category: 'utilities',
+    urgency: 'immediate', response_time: 'Same day',
+    summary: 'Emergency assistance for imminent power/water shutoffs.',
+    provides: 'Emergency payment sent directly to utility provider.',
+    eligibility: 'Residents facing imminent shutoff (notice required).',
+    how_to_apply: 'Call immediately. Same-day processing possible.',
+    phone: '(415) 555-0700', hours: 'Mon–Fri 8am–4:30pm', address: '170 Otis St, SF',
+    verified_days: 6, confidence: 'medium', required_docs: ['Shutoff notice', 'Utility bill', 'ID']
   },
   {
-    id: 6,
-    name: 'Eviction Prevention Hotline',
-    org: 'Bay Area Legal Aid',
-    category: 'housing',
-    urgency: 'immediate',
-    response_time: 'Same day',
-    summary: 'Free legal advice if you\'ve received an eviction notice or are at risk of eviction.',
-    provides: 'Free legal consultation, help understanding your rights, assistance responding to eviction notices, and referral to full legal representation if needed.',
-    eligibility: 'Any tenant in San Francisco facing eviction or housing instability. Income restrictions may apply for full representation.',
-    how_to_apply: 'Call the hotline. A staff attorney or paralegal will answer or call back same day. Have your lease and any notices you\'ve received ready.',
-    phone: '(415) 555-0560',
-    hours: 'Mon–Fri 9am–5pm · Hotline staffed until 6pm',
-    address: '1735 Telegraph Ave (also by phone)',
-    website: '#',
-    verified_days: 3,
-    confidence: 'high',
-    required_docs: ['Lease agreement', 'Any eviction or pay-or-quit notices received'],
-    tags: ['housing', 'legal', 'eviction', 'tenant-rights', 'free'],
-  },
-  {
-    id: 7,
-    name: 'LIHEAP Energy Assistance',
-    org: 'PG&E / State Program',
-    category: 'utilities',
-    urgency: 'within-week',
-    response_time: '5–7 days',
-    summary: 'Help paying your electric or gas bill — prevents shutoff for low-income households.',
-    provides: 'One-time payment toward past-due utility bills. Average benefit: $300–$800. Keeps service on during processing. Annual enrollment possible.',
-    eligibility: 'Households with income at or below 60% state median income. Priority given to households with elderly, disabled, or young children.',
-    how_to_apply: 'Apply online or call the LIHEAP office. If your service is about to be shut off, tell the representative — emergency processing available.',
-    phone: '(800) 555-0199',
-    hours: 'Mon–Fri 8am–5pm',
-    address: 'Apply online or by phone',
-    website: '#',
-    verified_days: 12,
-    confidence: 'medium',
-    required_docs: ['Photo ID', 'Most recent utility bill', 'Proof of income', 'Social Security numbers for all household members'],
-    tags: ['utilities', 'electricity', 'gas', 'shutoff-prevention', 'liheap'],
-  },
-  {
-    id: 8,
-    name: 'Utility Shutoff Prevention',
-    org: 'SF Human Services Agency',
-    category: 'utilities',
-    urgency: 'immediate',
-    response_time: 'Same day',
-    summary: 'Emergency assistance if your power or water is about to be shut off today.',
-    provides: 'Emergency payment to prevent utility shutoff. Works directly with utility company. Available while funds last.',
-    eligibility: 'SF residents facing imminent utility shutoff (must have received shutoff notice). Income limits apply.',
-    how_to_apply: 'Call immediately — same-day assistance is possible. Have your shutoff notice and account number ready.',
-    phone: '(415) 555-0700',
-    hours: 'Mon–Fri 8am–4:30pm (call before 3pm for same-day help)',
-    address: '170 Otis St, San Francisco, CA',
-    website: '#',
-    verified_days: 6,
-    confidence: 'medium',
-    required_docs: ['Shutoff notice', 'Utility account number', 'Photo ID', 'Proof of income'],
-    tags: ['utilities', 'emergency', 'shutoff', 'immediate'],
-  },
-  {
-    id: 9,
-    name: 'Community Health Clinic',
-    org: 'SF Community Health Center',
-    category: 'medical',
-    urgency: 'same-day',
-    response_time: 'Same/next day',
-    summary: 'Sliding-scale medical care regardless of insurance or immigration status.',
-    provides: 'Primary care, urgent care, mental health, dental, prescriptions. Fees based on income — as low as $0 for qualifying patients.',
-    eligibility: 'Everyone is welcome regardless of insurance, income, or immigration status. Fees are based on a sliding scale.',
-    how_to_apply: 'Call to schedule or walk in during clinic hours. For urgent issues, walk-in slots are available daily (limited number, arrive early).',
-    phone: '(415) 555-0321',
-    hours: 'Mon–Fri 8am–6pm · Walk-in urgent care 8am–12pm',
-    address: '3850 17th St, San Francisco, CA',
-    website: '#',
-    verified_days: 7,
-    confidence: 'medium',
-    required_docs: ['Any ID helpful but not required', 'Insurance card if you have one'],
-    tags: ['medical', 'sliding-scale', 'no-insurance', 'urgent-care'],
-  },
-  {
-    id: 10,
-    name: 'Medi-Cal Emergency Enrollment',
-    org: 'DHCS / Covered California',
-    category: 'medical',
-    urgency: 'within-week',
-    response_time: '1–3 days',
-    summary: 'Free or low-cost health insurance — can be approved within days in an emergency.',
-    provides: 'Full health insurance coverage including doctor visits, hospital, prescriptions, mental health, and dental. Free for most qualifying households.',
-    eligibility: 'CA residents with income below 138% federal poverty level. Undocumented adults 26-49 also now eligible.',
-    how_to_apply: 'Apply at your county social services office, online at coveredca.gov, or by phone. Emergency enrollments processed in 1–3 days.',
-    phone: '(800) 555-0025',
-    hours: 'Mon–Fri 8am–8pm · Sat 8am–6pm',
-    address: 'Apply online or by phone',
-    website: '#',
-    verified_days: 2,
-    confidence: 'high',
-    required_docs: ['Photo ID', 'Proof of income', 'Proof of CA residency', 'Social Security number (if you have one)'],
-    tags: ['medical', 'insurance', 'government', 'free'],
-  },
-  {
-    id: 11,
-    name: 'Prescription Assistance Program',
-    org: 'SF Dept. of Public Health',
-    category: 'medical',
-    urgency: 'within-week',
-    response_time: '2–5 days',
-    summary: 'Get your prescriptions free or at deeply reduced cost if you\'re uninsured.',
-    provides: 'Access to 1,500+ medications at no cost or $1–$5/prescription through partnerships with pharmaceutical companies.',
-    eligibility: 'Uninsured or underinsured SF residents. Income below 200% federal poverty level.',
-    how_to_apply: 'Contact your healthcare provider or call the program directly. Bring a list of your prescriptions.',
-    phone: '(415) 555-0480',
-    hours: 'Mon–Fri 8am–5pm',
-    address: '101 Grove St, San Francisco, CA',
-    website: '#',
-    verified_days: 18,
-    confidence: 'low',
-    required_docs: ['Prescription from a doctor', 'Proof of income', 'Photo ID'],
-    tags: ['medical', 'prescriptions', 'uninsured'],
-  },
-  {
-    id: 12,
-    name: 'Emergency Cash Assistance',
-    org: 'SF Human Services Agency',
-    category: 'cash',
-    urgency: 'within-week',
-    response_time: '3–5 days',
-    summary: 'One-time emergency cash for people in acute financial crisis with no other resources.',
-    provides: 'One-time cash payment of $150–$500 depending on need and availability. Can be used for any purpose.',
-    eligibility: 'SF residents who have exhausted other resources and face an immediate crisis (risk of homelessness, utility shutoff, etc.).',
-    how_to_apply: 'Call or visit the HSA office. Be prepared to explain your situation and provide documentation. Appointments recommended.',
-    phone: '(415) 555-0557',
-    hours: 'Mon–Fri 8am–5pm',
-    address: '170 Otis St, San Francisco, CA',
-    website: '#',
-    verified_days: 14,
-    confidence: 'medium',
-    required_docs: ['Photo ID', 'Proof of SF residency', 'Proof of income (or lack thereof)', 'Documentation of crisis (bill, notice, etc.)'],
-    tags: ['cash', 'emergency', 'one-time', 'general-assistance'],
-  },
-  {
-    id: 13,
-    name: 'Unemployment Insurance',
-    org: 'CA Employment Development Dept.',
-    category: 'cash',
-    urgency: 'general',
-    response_time: '2–3 weeks',
-    summary: 'Weekly income replacement if you lost your job through no fault of your own.',
-    provides: '60–70% of your prior weekly earnings, up to $450/week, for up to 26 weeks. Direct deposit or EDD debit card.',
-    eligibility: 'Employees who were laid off, had hours reduced, or left work for good cause. Must have earned enough wages in the base period.',
-    how_to_apply: 'File online at edd.ca.gov. File as soon as possible — benefits are not retroactive to before your claim date.',
-    phone: '(800) 300-5616',
-    hours: 'Phone: Mon–Fri 8am–12pm · Online 24/7',
-    address: 'Apply online at edd.ca.gov',
-    website: 'https://www.edd.ca.gov',
-    verified_days: 3,
-    confidence: 'high',
-    required_docs: ['Social Security number', 'Employment history (last 18 months)', 'Last employer info and reason for separation'],
-    tags: ['cash', 'unemployment', 'job-loss', 'weekly-benefit'],
-  },
-  {
-    id: 14,
-    name: 'Emergency Childcare Voucher',
-    org: 'First 5 SF / Child Care Connections',
-    category: 'childcare',
-    urgency: 'within-week',
-    response_time: '3–5 days',
-    summary: 'Emergency childcare funding while you stabilize your situation.',
-    provides: 'Subsidized childcare at participating providers for children ages 0–5. Emergency slots prioritized for families in crisis.',
-    eligibility: 'Low-income families with children 0–5 who need care to maintain employment or address a family crisis.',
-    how_to_apply: 'Call First 5 SF directly and explain you need emergency placement. Bring income documents and child\'s birth certificate.',
-    phone: '(415) 555-0611',
-    hours: 'Mon–Fri 9am–5pm',
-    address: '1390 Market St, Suite 900',
-    website: '#',
-    verified_days: 22,
-    confidence: 'low',
-    required_docs: ["Child's birth certificate", 'Proof of income', 'Photo ID', 'Documentation of emergency situation'],
-    tags: ['childcare', 'children', 'working-parents', 'emergency'],
-  },
-  {
-    id: 15,
-    name: 'Free Legal Help — Civil Matters',
-    org: 'Volunteer Legal Services Program',
-    category: 'cash', // Kept as cash in original data, probably means general aid
-    urgency: 'within-week',
-    response_time: '2–4 days',
-    summary: 'Free attorney assistance for civil legal issues affecting your financial stability.',
-    provides: 'Free legal advice and representation for issues like wage theft, benefits denials, debt collection, and landlord disputes.',
-    eligibility: 'Individuals with income below 200% federal poverty level facing civil legal issues.',
-    how_to_apply: 'Call for an intake screening. If you qualify, you will be matched with a volunteer attorney, typically within a week.',
-    phone: '(415) 555-0823',
-    hours: 'Mon–Fri 9am–5pm',
-    address: 'Appointments available remotely and in-person',
-    website: '#',
-    verified_days: 9,
-    confidence: 'medium',
-    required_docs: ['ID', 'Documents related to your legal issue', 'Proof of income'],
-    tags: ['legal', 'wage-theft', 'benefits', 'free', 'civil'],
-  },
+    id: 9, name: 'Sliding-Scale Health Clinic', org: 'Community Health Center', category: 'medical',
+    urgency: 'same-day', response_time: 'Same/next day',
+    summary: 'Medical care regardless of insurance or status.',
+    provides: 'Primary and urgent care. Fees based on income ($0+).',
+    eligibility: 'Everyone welcome regardless of status.',
+    how_to_apply: 'Walk in or call for appointment.',
+    phone: '(415) 555-0321', hours: 'Mon–Fri 8am–6pm', address: '3850 17th St, SF',
+    verified_days: 7, confidence: 'medium', required_docs: ['ID helpful but not required']
+  }
 ];
 
 // ═══════════════════════════════════ STATE ═══════════════════════════════════
 
-let state = {
-  urgency: 'general',
-  filter: 'all',
-  matched: [],
-  detectedNeeds: [],
-  summaryText: '',
-};
+let state = { urgency: 'general', filter: 'all', matched: [], summaryText: '' };
 
 // ═══════════════════════════════════ SETTINGS ════════════════════════════════
 
 function toggleSettings() {
   document.getElementById('settings-panel').classList.toggle('open');
-  const keyInput = document.getElementById('api-key-input');
   const stored = localStorage.getItem('caid_api_key');
-  if (stored) keyInput.value = stored;
+  if (stored) document.getElementById('api-key-input').value = stored;
 }
 
 function saveApiKey() {
@@ -1459,34 +1042,23 @@ function saveApiKey() {
 function setKeyStatus(hasKey) {
   const el = document.getElementById('key-status');
   if (hasKey) {
-    el.innerHTML = '<i data-lucide="check-circle" style="width:16px;height:16px;color:var(--success)"></i> <span>Claude API key active — AI analysis enabled</span>';
-    el.className = 'key-status active';
-    document.querySelector('.badge-ai').innerHTML = '<i data-lucide="sparkles" style="width:14px;height:14px"></i> Claude AI';
+    el.innerHTML = '<i data-lucide="check-circle" style="width:16px;height:16px;color:#16a34a"></i> <span style="color:#16a34a">Claude API key active</span>';
   } else {
-    el.innerHTML = '<i data-lucide="info" style="width:16px;height:16px"></i> <span>No API key set — using keyword matching</span>';
-    el.className = 'key-status inactive';
-    document.querySelector('.badge-ai').innerHTML = '<i data-lucide="sparkles" style="width:14px;height:14px"></i> AI-Powered';
+    el.innerHTML = '<i data-lucide="info" style="width:16px;height:16px"></i> <span>Regex matching active</span>';
   }
   lucide.createIcons();
 }
 
-// Check on load
-window.addEventListener('load', () => {
-  if (localStorage.getItem('caid_api_key')) setKeyStatus(true);
-});
-
-// Close settings on outside click
+window.addEventListener('load', () => { if (localStorage.getItem('caid_api_key')) setKeyStatus(true); });
 document.addEventListener('click', (e) => {
   const panel = document.getElementById('settings-panel');
-  const btn = document.getElementById('btn-settings');
-  if (panel.classList.contains('open') && !panel.contains(e.target) && !btn.contains(e.target)) {
+  if (panel.classList.contains('open') && !panel.contains(e.target) && !e.target.closest('#btn-settings')) {
     panel.classList.remove('open');
   }
 });
 
 // ═══════════════════════════════════ INTAKE ══════════════════════════════════
 
-// Urgency buttons
 document.querySelectorAll('.urgency-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('.urgency-btn').forEach(b => b.classList.remove('selected'));
@@ -1502,11 +1074,8 @@ async function startSearch() {
   const desc = document.getElementById('situation').value.trim();
   if (!desc) {
     document.getElementById('situation').focus();
-    document.getElementById('situation').style.borderColor = 'var(--urgent)';
-    setTimeout(() => { document.getElementById('situation').style.borderColor = ''; }, 2000);
     return;
   }
-
   showScreen('analyzing');
   await runAnalysis(desc);
 }
@@ -1514,18 +1083,17 @@ async function startSearch() {
 // ═══════════════════════════════════ ANALYZING ═══════════════════════════════
 
 const ANALYSIS_STEPS = [
-  { icon: 'file-text', text: 'Reading your situation description...' },
-  { icon: 'search', text: 'Identifying needs (food, housing, utilities...)' },
-  { icon: 'map-pin', text: 'Filtering by your location and household' },
-  { icon: 'shield-check', text: 'Checking program verification status' },
-  { icon: 'zap', text: 'Ranking by urgency and relevance' },
+  { text: 'Parsing natural language input', icon: 'message-square' },
+  { text: 'Extracting intent and required parameters', icon: 'search' },
+  { text: 'Querying deterministic verification database', icon: 'database' },
+  { text: 'Ranking matches by response latency', icon: 'list-ordered' },
 ];
 
 function renderAnalysisSteps() {
   const container = document.getElementById('analysis-steps');
   container.innerHTML = ANALYSIS_STEPS.map((s, i) => `
     <div class="analysis-step" id="step-${i}">
-      <div class="step-icon-wrapper"><i data-lucide="${s.icon}" style="width:18px;height:18px"></i></div>
+      <div class="step-icon"><i data-lucide="${s.icon}" style="width:14px;height:14px"></i></div>
       <span>${s.text}</span>
     </div>
   `).join('');
@@ -1534,362 +1102,204 @@ function renderAnalysisSteps() {
 
 async function runAnalysis(description) {
   renderAnalysisSteps();
-
-  // Animate steps
   for (let i = 0; i < ANALYSIS_STEPS.length; i++) {
     const el = document.getElementById(`step-${i}`);
     el.classList.add('active');
     await sleep(400 + Math.random() * 300);
     el.classList.remove('active');
     el.classList.add('done');
-    el.querySelector('.step-icon-wrapper').innerHTML = '<i data-lucide="check" style="width:18px;height:18px"></i>';
+    const iconEl = el.querySelector('.step-icon');
+    iconEl.innerHTML = '<i data-lucide="check" style="width:14px;height:14px"></i>';
     lucide.createIcons();
   }
 
-  // Try AI, fall back to keywords
   const apiKey = localStorage.getItem('caid_api_key');
-  let analysis;
-  if (apiKey) {
-    analysis = await analyzeWithClaude(description, apiKey);
-  } else {
-    analysis = analyzeWithKeywords(description);
-  }
-
-  state.detectedNeeds = analysis.needs;
+  let analysis = apiKey ? await analyzeWithClaude(description, apiKey) : analyzeWithKeywords(description);
+  
   state.summaryText = analysis.summary;
-
-  // Match and filter programs
   state.matched = matchPrograms(analysis.needs, state.urgency);
 
-  await sleep(400);
+  await sleep(500);
   showResults();
 }
-
-// ═══════════════════════════════════ AI ANALYSIS ═════════════════════════════
 
 async function analyzeWithClaude(description, apiKey) {
   try {
     const res = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': apiKey,
-        'anthropic-version': '2023-06-01',
-        'anthropic-dangerous-direct-browser-access': 'true',
-      },
+      headers: { 'Content-Type': 'application/json', 'x-api-key': apiKey, 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' },
       body: JSON.stringify({
-        model: 'claude-haiku-4-5-20251001',
-        max_tokens: 400,
-        system: `You are a crisis intake specialist for an aid matching tool. Analyze the person's situation and return ONLY valid JSON (no other text) with this exact structure:
-{
-  "needs": ["food","housing","utilities","medical","cash","childcare"],
-  "urgency": "immediate|within-week|general",
-  "summary": "One clear sentence summarizing their core situation and primary needs."
-}
-Only include needs that are clearly relevant. urgency should be "immediate" if they need help today.`,
+        model: 'claude-haiku-4-5-20251001', max_tokens: 400,
+        system: `Output JSON: { "needs": ["food","housing","utilities","medical","cash","childcare"], "summary": "One sentence summary." }`,
         messages: [{ role: 'user', content: description }],
       }),
     });
-    const data = await res.json();
-    const text = data.content?.[0]?.text || '';
+    const text = (await res.json()).content?.[0]?.text || '';
     const parsed = JSON.parse(text.match(/\{[\s\S]*\}/)?.[0] || '{}');
-    if (parsed.needs && parsed.summary) return parsed;
+    if (parsed.needs) return parsed;
   } catch (_) {}
   return analyzeWithKeywords(description);
 }
 
-function analyzeWithKeywords(description) {
-  const d = description.toLowerCase();
+function analyzeWithKeywords(d) {
+  d = d.toLowerCase();
   const needs = [];
-
-  const patterns = {
-    food:      /\b(food|hungry|hunger|eat|eating|groceries|grocery|meal|meals|starving|nutrition|wic|snap|pantry|feed|feeding|dinner|lunch|breakfast)\b/,
-    housing:   /\b(rent|renting|evict|eviction|homeless|homelessness|shelter|housing|apartment|landlord|home|house|lease|nowhere to (live|go|stay))\b/,
-    utilities: /\b(electric|electricity|gas|water|utility|utilities|power|heating|cooling|heat|bill|bills|shutoff|shut off|lights)\b/,
-    medical:   /\b(medical|health|doctor|medicine|insurance|prescription|hospital|sick|clinic|healthcare|dental|therapy|mental health)\b/,
-    cash:      /\b(money|cash|afford|financial|income|unemployed|unemployment|job loss|laid off|no income|debt|bills|broke|paycheck)\b/,
-    childcare: /\b(child|children|kids|baby|babies|daycare|day care|school|infant|toddler|pregnant|pregnancy)\b/,
-  };
-
-  for (const [need, pattern] of Object.entries(patterns)) {
-    if (pattern.test(d)) needs.push(need);
-  }
-
-  // Always have at least food and cash as a fallback if nothing matched
-  if (needs.length === 0) {
-    needs.push('food', 'cash');
-  }
-
-  const summary = buildSummary(needs, d);
-  return { needs, summary };
+  if (/(food|hungry|groceries|meal)/.test(d)) needs.push('food');
+  if (/(rent|evict|homeless|housing|lease)/.test(d)) needs.push('housing');
+  if (/(electric|gas|water|utility|shutoff|power)/.test(d)) needs.push('utilities');
+  if (/(medical|health|doctor|sick|clinic)/.test(d)) needs.push('medical');
+  if (needs.length === 0) needs.push('food', 'housing');
+  return { needs, summary: "Input analyzed. Required intervention categories identified. Querying verified registry." };
 }
-
-function buildSummary(needs, d) {
-  const parts = [];
-  if (needs.includes('food')) parts.push('food assistance');
-  if (needs.includes('housing')) parts.push('housing/rental help');
-  if (needs.includes('utilities')) parts.push('utility assistance');
-  if (needs.includes('medical')) parts.push('medical resources');
-  if (needs.includes('cash')) parts.push('emergency cash aid');
-  if (needs.includes('childcare')) parts.push('childcare support');
-
-  const urgencyWord = state.urgency === 'today' ? 'urgently needs' : 'is looking for';
-  return `Based on your description, this person ${urgencyWord} ${joinList(parts)}. Programs below are matched to these needs.`;
-}
-
-function joinList(arr) {
-  if (arr.length === 0) return 'general assistance';
-  if (arr.length === 1) return arr[0];
-  return arr.slice(0, -1).join(', ') + ' and ' + arr[arr.length - 1];
-}
-
-// ═══════════════════════════════════ MATCHING ════════════════════════════════
 
 function matchPrograms(needs, urgency) {
-  const urgencyScore = { immediate: 3, 'same-day': 2, 'within-week': 1, general: 0 };
-  const selectedUrgencyScore = urgency === 'today' ? 3 : urgency === 'week' ? 1 : 0;
-
+  const uScore = { immediate: 3, 'same-day': 2, 'within-week': 1, general: 0 };
   return PROGRAMS
     .filter(p => needs.includes(p.category) || needs.length === 0)
-    .map(p => {
-      let score = 0;
-      // Urgency match
-      if (urgency === 'today') score += urgencyScore[p.urgency] * 3;
-      // Confidence boost
-      score += p.confidence === 'high' ? 2 : p.confidence === 'medium' ? 1 : 0;
-      // Recency
-      score += Math.max(0, 3 - Math.floor(p.verified_days / 7));
-      return { ...p, score };
-    })
+    .map(p => ({ ...p, score: (urgency === 'today' ? uScore[p.urgency]*3 : 0) }))
     .sort((a, b) => b.score - a.score);
 }
 
 // ═══════════════════════════════════ RESULTS ═════════════════════════════════
 
 function showResults() {
-  // AI card
   document.getElementById('ai-summary-text').textContent = state.summaryText;
-  const tagsEl = document.getElementById('need-tags');
-  tagsEl.innerHTML = state.detectedNeeds.map(n => {
-    const cat = CATEGORIES[n];
-    return cat ? `<span class="need-tag"><i data-lucide="${cat.icon}" style="width:14px;height:14px"></i> ${cat.label}</span>` : '';
-  }).join('');
-
-  // Urgent banner
+  
   const banner = document.getElementById('urgent-banner');
   if (state.urgency === 'today') {
-    banner.style.display = 'flex';
-    document.getElementById('urgent-banner-text').textContent =
-      'We\'ve prioritized programs with same-day or immediate response at the top. Call before visiting to confirm availability — demand can be high.';
+    banner.style.display = 'block';
+    document.getElementById('urgent-banner-text').textContent = 'Resources with same-day response times are prioritized.';
   } else {
     banner.style.display = 'none';
   }
 
-  // Filter tabs
   renderFilterTabs();
   renderResults();
-
   showScreen('results');
 }
 
 function renderFilterTabs() {
   const tabs = document.getElementById('filter-tabs');
-  const allCount = state.matched.length;
   const counts = {};
   state.matched.forEach(p => { counts[p.category] = (counts[p.category] || 0) + 1; });
 
-  const relevantCats = Object.keys(counts);
-  let html = `<button class="filter-tab active" data-cat="all" onclick="setFilter('all')">All <span class="tab-count">${allCount}</span></button>`;
-  for (const cat of relevantCats) {
-    const c = CATEGORIES[cat];
-    if (!c) continue;
-    html += `<button class="filter-tab" data-cat="${cat}" onclick="setFilter('${cat}')"><i data-lucide="${c.icon}" style="width:14px;height:14px"></i> ${c.label} <span class="tab-count">${counts[cat]}</span></button>`;
-  }
+  let html = `<button class="filter-tab active" data-cat="all" onclick="setFilter('all')">All <span class="tab-count">${state.matched.length}</span></button>`;
+  Object.keys(counts).forEach(cat => {
+    html += `<button class="filter-tab" data-cat="${cat}" onclick="setFilter('${cat}')">${CATEGORIES[cat].label} <span class="tab-count">${counts[cat]}</span></button>`;
+  });
   tabs.innerHTML = html;
-  lucide.createIcons();
 }
 
 function setFilter(cat) {
   state.filter = cat;
-  document.querySelectorAll('.filter-tab').forEach(t => {
-    t.classList.toggle('active', t.dataset.cat === cat);
-  });
+  document.querySelectorAll('.filter-tab').forEach(t => t.classList.toggle('active', t.dataset.cat === cat));
   renderResults();
 }
 
 function renderResults() {
-  const sort = document.getElementById('sort-select').value;
-  let programs = state.matched.filter(p => state.filter === 'all' || p.category === state.filter);
-
-  if (sort === 'urgency') {
-    const order = { immediate: 0, 'same-day': 1, 'within-week': 2, general: 3 };
-    programs = [...programs].sort((a, b) => order[a.urgency] - order[b.urgency]);
-  } else if (sort === 'verified') {
-    programs = [...programs].sort((a, b) => a.verified_days - b.verified_days);
-  }
-
-  const count = programs.length;
-  document.getElementById('results-count').textContent =
-    `${count} program${count !== 1 ? 's' : ''} found`;
-
+  const programs = state.matched.filter(p => state.filter === 'all' || p.category === state.filter);
+  document.getElementById('results-count').textContent = `${programs.length} Verified Records`;
   const grid = document.getElementById('programs-grid');
-  if (count === 0) {
-    grid.innerHTML = `<div class="no-results"><i data-lucide="search-X"></i><h3>No programs found</h3><p>Try selecting "All" to see all matched programs.</p></div>`;
-    lucide.createIcons();
+  
+  if (programs.length === 0) {
+    grid.innerHTML = `<div style="padding: 40px 0; color: var(--gray-500); text-align:center;">No records matched the current filter constraints.</div>`;
     return;
   }
-
   grid.innerHTML = programs.map(p => renderProgramCard(p)).join('');
   lucide.createIcons();
 }
 
-function verificationBadge(p) {
-  const days = p.verified_days;
-  const conf = p.confidence;
-  let cls, text, icon;
-  if (conf === 'high' && days <= 5) {
-    cls = 'badge-verified-high';
-    text = `Verified ${days === 1 ? '1 day' : days + ' days'} ago`;
-    icon = 'check-circle-2';
-  } else if (conf === 'medium' || (days > 5 && days <= 14)) {
-    cls = 'badge-verified-medium';
-    text = `Verified ${days} days ago`;
-    icon = 'clock';
-  } else if (days > 14 && days <= 30) {
-    cls = 'badge-verified-low';
-    text = `Verified ${days} days ago`;
-    icon = 'alert-circle';
-  } else {
-    cls = 'badge-verified-unknown';
-    text = 'May be outdated';
-    icon = 'help-circle';
-  }
-  return `<span class="badge ${cls}"><i data-lucide="${icon}" style="width:12px;height:12px"></i> ${text}</span>`;
-}
-
-function responseBadge(p) {
-  const isUrgent = p.urgency === 'immediate' || p.urgency === 'same-day';
-  return `<span class="badge badge-response${isUrgent ? ' urgent-response' : ''}"><i data-lucide="zap" style="width:12px;height:12px"></i> ${p.response_time}</span>`;
-}
-
 function renderProgramCard(p) {
-  const cat = CATEGORIES[p.category];
   const isUrgent = p.urgency === 'immediate' || p.urgency === 'same-day';
+  const icon = CATEGORIES[p.category].icon;
   return `
-    <div class="program-card${isUrgent ? ' urgent-card' : ''}" onclick="openModal(${p.id})">
-      <div class="card-header">
-        <div class="card-header-left">
-          <div class="cat-icon" style="background:${cat.bg}; color:${cat.color}">
-            <i data-lucide="${cat.icon}" style="width:24px;height:24px"></i>
-          </div>
-          <div class="card-title-block">
-            <div class="card-title">${p.name}</div>
-            <div class="card-org">${p.org}</div>
-          </div>
-        </div>
-        <div class="card-badges">
-          ${responseBadge(p)}
-          ${verificationBadge(p)}
-        </div>
+    <div class="program-card ${isUrgent ? 'urgent-card' : ''}" onclick="openModal(${p.id})">
+      <div class="card-main">
+        <div class="card-title">${p.name}</div>
+        <div class="card-org"><i data-lucide="${icon}" style="width:14px"></i> ${p.org}</div>
       </div>
-      <div class="card-summary">${p.summary}</div>
-      <div class="card-meta">
-        <span class="card-meta-item"><i data-lucide="phone"></i> ${p.phone}</span>
-        <span class="card-meta-item"><i data-lucide="clock"></i> ${p.hours.split('·')[0].trim()}</span>
+      <div class="card-meta-col">
+        <div class="meta-text"><i data-lucide="phone" style="width:16px"></i> ${p.phone}</div>
+        <div class="meta-text"><i data-lucide="map-pin" style="width:16px"></i> ${p.address.split(',')[0]}</div>
       </div>
-      <div class="card-footer">
-        <button class="btn-details">View details & apply <i data-lucide="arrow-right" style="width:16px;height:16px"></i></button>
-        <span class="card-docs"><i data-lucide="file-text"></i> ${p.required_docs.length} doc${p.required_docs.length !== 1 ? 's' : ''} needed</span>
+      <div class="card-status-col">
+        <div class="status-item status-response">
+          ${isUrgent ? `<i data-lucide="zap" style="width:14px"></i>` : ''} 
+          ${p.response_time}
+        </div>
+        <div class="status-item status-verified">
+          <i data-lucide="check-circle" style="width:14px"></i> 
+          Verified ${p.verified_days}d ago
+        </div>
       </div>
     </div>
   `;
 }
 
-// ═══════════════════════════════════ MODAL ═══════════════════════════════════
+// ═══════════════════════════════════ MODALS ══════════════════════════════════
 
 function openModal(id) {
   const p = PROGRAMS.find(x => x.id === id);
   if (!p) return;
-  const cat = CATEGORIES[p.category];
 
   document.getElementById('modal-box').innerHTML = `
     <div class="modal-header">
-      <div class="modal-header-left">
-        <div class="cat-icon" style="background:${cat.bg}; color:${cat.color}">
-          <i data-lucide="${cat.icon}"></i>
-        </div>
-        <div>
-          <div class="modal-title">${p.name}</div>
-          <div class="modal-org">${p.org}</div>
-        </div>
+      <div>
+        <div class="modal-title">${p.name}</div>
+        <div class="modal-org"><i data-lucide="building" style="width:16px"></i> ${p.org}</div>
       </div>
       <div class="modal-actions">
-        <button class="btn-icon" title="Print Details" onclick="window.print()">
-          <i data-lucide="printer" style="width:18px;height:18px"></i>
+        <button class="btn-icon" title="Print Record" onclick="window.print()">
+          <i data-lucide="printer"></i>
         </button>
-        <button class="btn-icon" onclick="closeModal()">
-          <i data-lucide="x" style="width:20px;height:20px"></i>
+        <button class="btn-icon" onclick="closeModal(null, 'program-modal')">
+          <i data-lucide="x"></i>
         </button>
       </div>
     </div>
-    <div class="modal-body">
-      <div class="modal-badges">
-        ${responseBadge(p)}
-        ${verificationBadge(p)}
-        <span class="badge" style="background:${cat.bg}; color:${cat.color}; border: 1px solid ${cat.color}33">
-          <i data-lucide="${cat.icon}" style="width:12px;height:12px"></i> ${cat.label}
-        </span>
-      </div>
+    
+    <div class="modal-section" style="margin-top: 32px">
+      <h4><i data-lucide="package"></i> Provision Overview</h4>
+      <p>${p.provides}</p>
+    </div>
 
-      <div class="modal-section">
-        <h4><i data-lucide="box" style="width:16px;height:16px"></i> What they provide</h4>
-        <p>${p.provides}</p>
-      </div>
+    <div class="modal-section">
+      <h4><i data-lucide="user-check"></i> Eligibility Parameters</h4>
+      <p>${p.eligibility}</p>
+    </div>
 
-      <div class="modal-section">
-        <h4><i data-lucide="users" style="width:16px;height:16px"></i> Who qualifies</h4>
-        <p>${p.eligibility}</p>
-      </div>
+    <div class="modal-section">
+      <h4><i data-lucide="clipboard-list"></i> Action Items</h4>
+      <p>${p.how_to_apply}</p>
+      <ul style="margin-top: 8px;">${p.required_docs.map(d => `<li>${d}</li>`).join('')}</ul>
+    </div>
 
-      <div class="modal-section">
-        <h4><i data-lucide="mouse-pointer-click" style="width:16px;height:16px"></i> How to apply / get help</h4>
-        <p>${p.how_to_apply}</p>
-      </div>
-
-      <div class="modal-section">
-        <h4><i data-lucide="file-check-2" style="width:16px;height:16px"></i> Documents you'll need</h4>
-        <ul>${p.required_docs.map(d => `<li>${d}</li>`).join('')}</ul>
-      </div>
-
-      <div class="modal-section">
-        <h4><i data-lucide="building-2" style="width:16px;height:16px"></i> Contact & hours</h4>
-        <div class="contact-grid">
-          <div class="contact-item">
-            <div class="label"><i data-lucide="phone" style="width:12px;height:12px"></i> Phone</div>
-            <div class="value"><a href="tel:${p.phone.replace(/[^+\d]/g,'')}">${p.phone}</a></div>
-          </div>
-          <div class="contact-item">
-            <div class="label"><i data-lucide="clock" style="width:12px;height:12px"></i> Hours</div>
-            <div class="value">${p.hours}</div>
-          </div>
-          <div class="contact-item" style="grid-column: 1 / -1">
-            <div class="label"><i data-lucide="map-pin" style="width:12px;height:12px"></i> Location</div>
-            <div class="value">${p.address}</div>
-          </div>
-          <div class="contact-item" style="grid-column: 1 / -1">
-            <div class="label"><i data-lucide="calendar-check" style="width:12px;height:12px"></i> Last verified</div>
-            <div class="value">${p.verified_days === 1 ? 'Yesterday' : p.verified_days + ' days ago'}</div>
-          </div>
+    <div class="modal-section">
+      <h4><i data-lucide="book-open"></i> Contact Data</h4>
+      <div class="contact-grid">
+        <div class="contact-item">
+          <div class="label">Phone</div>
+          <div class="value">${p.phone}</div>
+        </div>
+        <div class="contact-item">
+          <div class="label">Location</div>
+          <div class="value">${p.address}</div>
+        </div>
+        <div class="contact-item">
+          <div class="label">Operating Hours</div>
+          <div class="value">${p.hours}</div>
+        </div>
+        <div class="contact-item">
+          <div class="label">Verification</div>
+          <div class="value" style="color:#16a34a">${p.verified_days} days ago</div>
         </div>
       </div>
-
-      <div class="modal-cta">
-        <a class="btn-call" href="tel:${p.phone.replace(/[^+\d]/g,'')}">
-          <i data-lucide="phone" style="width:20px;height:20px"></i> Call ${p.phone}
-        </a>
-        <p class="modal-disclaimer">Always call ahead to confirm availability before visiting in person. Program status and hours can change without notice. CrisisAid is not affiliated with this organization.</p>
-      </div>
     </div>
+    
+    <a class="btn-call" href="tel:${p.phone.replace(/[^+\d]/g,'')}">
+      Call Program Now
+      <i data-lucide="phone-call" style="width:18px"></i>
+    </a>
   `;
 
   document.getElementById('program-modal').classList.add('open');
@@ -1897,41 +1307,34 @@ function openModal(id) {
   lucide.createIcons();
 }
 
-function closeModal(e) {
-  if (e && e.target !== document.getElementById('program-modal') && !e.target.closest('.btn-icon')) return;
-  document.getElementById('program-modal').classList.remove('open');
+function openArchModal() {
+  document.getElementById('arch-modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(e, id) {
+  if (e && e.target !== document.getElementById(id) && !e.target.closest('.btn-icon')) return;
+  document.getElementById(id).classList.remove('open');
   setTimeout(() => { document.body.style.overflow = ''; }, 300);
 }
 
-// ═══════════════════════════════════ SCREENS ═════════════════════════════════
+// ═══════════════════════════════════ FLOW ════════════════════════════════════
 
 function showScreen(name) {
   ['intake', 'analyzing', 'results'].forEach(s => {
     const el = document.getElementById(`screen-${s}`);
-    if (s === name) {
-      el.classList.add('active');
-    } else {
-      el.classList.remove('active');
-    }
+    s === name ? el.classList.add('active') : el.classList.remove('active');
   });
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  window.scrollTo(0,0);
 }
-
-// ═══════════════════════════════════ UTILS ═══════════════════════════════════
 
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
-// Keyboard: Escape closes modal
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
-    const modal = document.getElementById('program-modal');
-    if (modal.classList.contains('open')) {
-      closeModal();
-    }
-    const panel = document.getElementById('settings-panel');
-    if (panel.classList.contains('open')) {
-      panel.classList.remove('open');
-    }
+    document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('open'));
+    document.getElementById('settings-panel').classList.remove('open');
+    document.body.style.overflow = '';
   }
 });
 </script>
